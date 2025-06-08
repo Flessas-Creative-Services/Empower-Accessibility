@@ -1,0 +1,183 @@
+---
+import Logo from '../assets/logo.svg';
+import MenuButton from './MenuButton.tsx';
+
+interface Props {
+	currPage: string;
+}
+const { currPage } = Astro.props;
+const navLinks = [{
+  to: '/',
+  text: 'Home',
+}, {
+  to: '/services/',
+  text: 'Services',
+}, {
+  to: '/talks/',
+  text: 'Talks',
+}, {
+  to: '/blog/',
+  text: 'Blog',
+}, {
+  to: '/contact/',
+  text: 'Contact',
+}];
+---
+
+<header>
+  <div class="top-bar">
+    <a href="/" class="logo"><Logo /></a>
+    <MenuButton classes="menu-btn" client:visible />
+  </div>
+  <nav aria-label="Main">
+    <ul class="nav-links">
+      {navLinks.map((link) => (
+        <li>
+          <a 
+            href={link.to} 
+            {...(link.text.toLowerCase() === currPage.toLowerCase() ? { "aria-current": "page"} : {})}
+            >
+              {link.text}
+            </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<style is:global>
+  header {
+		padding: 1.25rem 1rem;
+    color: #fff;
+	}
+
+  header:has(.menu-btn[aria-expanded="true"]) {
+    background-color: #fff;
+    color: #120d42;
+    z-index: 2;
+  }
+
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+		--logo-width: 9.375rem;
+    --logo-height: 2.5rem;
+    display: block;
+    width: var(--logo-width);
+    height: var(--logo-height);
+	}
+
+  .menu-btn {
+		--btn-width: 1.875rem;
+    --btn-height: 1.5rem;
+    display: block;
+    width: var(--btn-width);
+    height: var(--btn-height);
+    border: none;
+	}
+
+  .top-bar:has(.menu-btn[aria-expanded="false"]) + nav[aria-label="Main"] {
+		display: none;
+	}
+
+  nav[aria-label="Main"] {
+    margin: 3rem 0 0.75rem;
+  }
+
+  nav[aria-label="Main"] ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  nav[aria-label="Main"] a {
+    padding: 0 0.25rem;
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  nav[aria-label="Main"] a[aria-current="page"] {
+    border-bottom: 0.25rem solid currentColor;
+  }
+
+  @media screen and (min-width: 48em) {
+    .logo {
+      --logo-width: 14.0625rem;
+      --logo-height: 3.75rem;
+    }
+
+    .menu-btn {
+      --btn-width: 2.34375rem;
+      --btn-height: 1.875rem;
+    }
+
+    nav[aria-label="Main"] a {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media screen and (min-width: 62em) {
+    header {
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu-btn {
+      display: none;
+    }
+
+    nav[aria-label="Main"] {
+      display: block !important;
+      margin: 0;
+      height: fit-content;
+    }
+
+    nav[aria-label="Main"] ul {
+      flex-direction: row;
+    }
+
+    nav[aria-label="Main"] a {
+      font-weight: 400;
+    }
+  }
+
+  @media screen and (min-width: 90em) {
+    header {
+      padding: 4rem;
+    }
+
+    .logo {
+      --logo-width: 18.875rem;
+      --logo-height: 5rem;
+    }
+  }
+</style>
+
+<script>
+  const menuBtn = document.querySelector(".menu-btn") as HTMLButtonElement;
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== "Escape") return;
+    if (window.matchMedia('(min-width: 62em)').matches) return;
+    if (menuBtn.getAttribute('aria-expanded') === 'true') {
+      menuBtn.click();
+      menuBtn.focus();
+    }
+  });
+  document.querySelector("header")!.addEventListener('focusout', (e) => {
+    const target = e.currentTarget as HTMLElement;
+    const relatedTarget = e.relatedTarget;
+    if (relatedTarget instanceof Node && !target.contains(relatedTarget)) {
+      menuBtn.click();
+    }
+  });
+</script>
+
