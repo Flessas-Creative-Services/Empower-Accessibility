@@ -1,8 +1,80 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HeroImage from '../assets/hero-image.svg';
 const page = 'Home';
 ---
 
 <Layout page={page}>
-  <h1>{page}</h1>
+  <div class="hero">
+    <div class="hero-txt">
+      <p class="lead-txt">Let’s create a future where access opens doors, not just websites</h1>
+      <p class="sec-txt">Welcome to Empower Accessibility. We believe accessibility is more than compliance. It’s a catalyst for equity, inclusion, and opportunity. Our mission is to empower people and expand access to dignified work by transforming how organizations think about accessibility.</p>
+      <a href="/contact/" class="dark-bg btn">Let's Collaborate</a>
+    </div>
+    <div class="hero-img"><HeroImage aria-hidden="true" /></div>
+  </div>
 </Layout>
+
+<style>
+  .hero {
+    padding: 1.75rem 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .hero-txt {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .lead-txt {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  .sec-txt {
+    font-size: 1.25rem;
+  }
+
+  .hero-img {
+    padding: 0 0.5625rem;
+  }
+
+  @media screen and (min-width: 48em) {
+    .hero {
+      flex-direction: row;
+    }
+
+    .hero-txt {
+      flex: 1 1 auto;
+      max-width: 80ch;
+    }
+
+    .hero-img {
+      padding: 0;
+      flex: 0 0 35%;
+      align-self: center;
+    }
+  }
+
+  @media screen and (min-width: 62em) {
+    .hero {
+      padding: 2rem;
+    }
+  }
+
+  @media screen and (min-width: 75em) {
+    .hero-img {
+      flex: 0 0 25%;
+    }
+  }
+
+  @media screen and (min-width: 90em) {
+    .hero {
+      padding: 4rem;
+    }
+  }
+</style>

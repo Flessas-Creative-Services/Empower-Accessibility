@@ -62,3 +62,36 @@ a:focus-visible {
 ul {
   list-style-type: none;
 }
+
+.btn {
+  display: block;
+  width: 100%;
+  background-color: #0771ea;
+  border-radius: 1000px;
+  padding: 1.375rem 0;
+  font-weight: 800;
+  font-size: 1.25rem;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn:focus-visible {
+  outline: 0.1875rem solid;
+  outline-offset: 0.1875rem;
+}
+
+.btn.light-bg:focus-visible {
+  outline-color: #0771ea;
+}
+
+.btn.dark-bg:focus-visible {
+  outline-color: #fff;
+}
+
+@media screen and (min-width: 48em) {
+  .btn {
+    width: fit-content;
+    padding: 1.25rem;
+  }
+}
