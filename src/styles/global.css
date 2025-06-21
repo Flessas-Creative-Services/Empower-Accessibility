@@ -18,6 +18,7 @@
   font-size: 100%;
 }
 
+/* GENERAL */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -28,6 +29,10 @@
   clip-path: inset(50%);
   overflow: hidden;
   white-space: nowrap;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 html,
@@ -87,6 +92,11 @@ ul {
 
 .btn.dark-bg:focus-visible {
   outline-color: #fff;
+}
+
+/* prevents tooltip display on hover */
+svg[role="img"] {
+  pointer-events: none;
 }
 
 @media screen and (min-width: 48em) {

@@ -19,7 +19,10 @@ const { page } = Astro.props;
   </head>
   <body>
     <Header currPage={page} />
-    <main>
+    {/* use page label for main landmark on homepage since it isn't immediately followed by a heading */}
+    <main 
+      {...(page.toLowerCase() === "home" ? {"aria-label": page} : "")}
+    >
       <slot />
     </main>
   </body>

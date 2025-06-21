@@ -26,7 +26,18 @@ const navLinks = [{
 
 <header>
   <div class="top-bar">
-    <a href="/" class="logo"><Logo /></a>
+    {
+      currPage.toLowerCase() === "home" ? (
+        <h1 aria-labelledby="logo home" class="logo">
+          <Logo id="logo" />
+          <span id="home" hidden>Home</span>
+        </h1>
+      ) : (
+        <div class="logo">
+          <Logo />
+        </div>
+      )
+    }
     <MenuButton classes="menu-btn" client:visible />
   </div>
   <nav aria-label="Main">
