@@ -1,0 +1,94 @@
+---
+import ArrowRightIcon from '../assets/arrow-right.svg';
+
+interface Props {
+	to: string;
+  text: string;
+}
+const { to, text } = Astro.props;
+---
+
+<a href={to}>
+  <span aria-hidden="true"><slot name="img" /></span>
+  <span>{text}</span>
+  <span aria-hidden="true"><ArrowRightIcon /></span>
+</a>
+
+<style>
+  a {
+    border-top: 0.0625rem solid #d9ddf2;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    text-decoration: none;
+  }
+
+  a:hover,
+  a:focus-visible {
+    background-color: #0866d3;
+    color: #fff;
+  }
+
+  span:nth-of-type(1) {
+    --img-width: 2.625rem;
+    --img-height: 2rem;
+    width: var(--img-width);
+    height: var(--img-height);
+    background-color: #0771ea;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  a:hover span:nth-of-type(1),
+  a:focus-visible span:nth-of-type(1) {
+    background-color: #fff;
+  }
+
+  span:nth-of-type(2) {
+    flex: 1 1 auto;
+    font-size: 1rem;
+  }
+
+  span:nth-of-type(3) {
+    --icon-width: 1rem;
+    flex: 0 0 var(--icon-width);
+  }
+
+  @media screen and (min-width: 48em) {
+    a {
+      gap: 1rem;
+      padding: 1.5rem;
+    }
+
+    span:nth-of-type(1) {
+      --img-width: 5.25rem;
+      --img-height: 4rem;
+      padding: 0.75rem 1.25rem;
+    }
+
+    span:nth-of-type(2) {
+      font-size: 1.25rem;
+    }
+
+    span:nth-of-type(3) {
+      --icon-width: 1.5rem;
+    }
+  }
+
+  @media screen and (min-width: 62em) {
+    a {
+      gap: 2rem;
+      padding: 1.5rem 2rem;
+    }
+  }
+
+  @media screen and (min-width: 90em) {
+    a {
+      padding: 2rem 4rem;
+    }
+  }
+</style>
