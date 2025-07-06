@@ -1,0 +1,192 @@
+---
+import Logo from '../assets/logo.svg';
+import ExternalLinkIcon from '../assets/external-link.svg';
+---
+
+<footer class="footer section">
+  <div class="content">
+    <div class="cta">
+      <div class="logo"><Logo /></div>
+      <p>Whether you’re ready to start a project, have questions about our services, or just want to connect, we’d love to hear from you.</p>
+      <a href="/contact/" class="dark-bg btn">Get In Touch</a>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/talks/">Talks</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+    <ul class="socials">
+      <li>
+        <a href="https://bsky.app/profile/empower-a11y.bsky.social">
+          Bluesky
+          <ExternalLinkIcon aria-hidden="true" class="ext-link" />
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/company/empower-accessibility">
+          LinkedIn
+          <ExternalLinkIcon aria-hidden="true" class="ext-link" />
+        </a>
+      </li>
+      <li>
+        <a href="https://www.instagram.com/empower_accessibility/#">
+          Instagram
+          <ExternalLinkIcon aria-hidden="true" class="ext-link" />
+        </a>
+      </li>
+    </ul>
+  </div>
+  <small>
+    <span class="fine-print">
+      <a href="/accessibility/">Accessibility</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-service/">Terms of Service</a>
+    </span>
+    <span>&copy; 2025 Empower Accessibility Inc. All Rights Reserved.</span>
+  </small>
+</footer>
+
+<style>
+  .footer.section {
+    gap: 0;
+    background-color: #120d42;
+    padding-top: 2.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .cta {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .cta p {
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  .footer li {
+    width: max-content;
+    margin-bottom: 0.875rem;
+    border-bottom: 0.0625rem solid currentColor;
+    padding: 0.125rem 0.0625rem;
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  .footer a {
+    text-decoration: none;
+  }
+
+  .ext-link {
+    display: none;
+  }
+
+  .footer small {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 300;
+  }
+
+  .fine-print a {
+    text-decoration: underline;
+    line-height: 1;
+  }
+
+  .fine-print a:not(:last-of-type) {
+    border-right: 0.0625rem solid currentColor;
+    padding-right: 0.5rem;
+  }
+
+  .fine-print a+a {
+    padding-left: 0.5rem;
+  }
+
+  @media screen and (min-width: 22.5em) {
+    .footer small {
+      font-size: 0.875rem;
+    }
+  }
+
+  @media screen and (min-width: 48em) {
+    .content {
+      display: grid;
+      grid-template: auto 1fr / 40% 1fr;
+      gap: 1rem;
+    }
+
+    .cta {
+      grid-row: 1 / span 2;
+    }
+
+    nav ul {
+      margin-top: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .socials {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .socials li {
+      width: 50%;
+      display: flex;
+      justify-content: flex-end;
+      border-color: #42427c;
+      padding: 0.75rem 1rem;
+      font-size: 1.2rem;
+    }
+
+    .socials a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ext-link {
+      --icon-size: 1rem;
+      display: block;
+      width: var(--icon-size);
+      height: var(--icon-size);
+    }
+
+    .footer small {
+      flex-direction: row;
+      border-top: 0.0625rem solid #42427c;
+      padding: 1rem;
+      justify-content: center;
+    }
+  }
+
+  @media screen and (min-width: 60em) {
+    .cta p {
+      font-size: 1.2rem;
+    }
+
+    .socials li {
+      width: 30%;
+      font-size: 1.25rem;
+    }
+
+    nav ul {
+      justify-content: flex-end;
+      gap: 2.25rem;
+    }
+
+    .footer small {
+      padding: 1.5rem;
+      justify-content: flex-end;
+    }
+  }
+</style>

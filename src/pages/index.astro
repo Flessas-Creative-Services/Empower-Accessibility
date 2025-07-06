@@ -55,10 +55,10 @@ const services = [
     </div>
     <div class="hero-img"><HeroImage aria-hidden="true" /></div>
   </div>
-  <div class="section">
+  <div class="services section">
     <h2>Our Services</h2>
     <p class="lead-txt">Building accessibility into every layer of your organization</p>
-    <div class="links-wrapper">
+    <div class="service-links">
       {
         services.map((service) => {
           const Icon = service.icon;
@@ -70,7 +70,7 @@ const services = [
       }
     </div>
   </div>
-  <div class="section">
+  <div class="newsletter section">
     <h2>What Makes Us Different</h2>
     <p class="lead-txt">We lead with empathy, integrity, and practical knowledge</p>
     <div class="diff-content">
@@ -81,41 +81,30 @@ const services = [
       <div class="diff-img"><IllustrationImage aria-hidden="true" /></div>
     </div>
   </div>
-  <div class="section"></div>
 </Layout>
 
 <style>
-  .section {
-    padding: 1.5rem 1rem 4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  .hero.section {
+    border-radius: 0;
+    margin-top: 0;
+    padding-top: 0.5rem;
   }
 
-  .section:not(.hero) {
-    margin-top: -2rem;
-    border-radius: 1.875rem 1.875rem 0 0;
-  }
-
-  .section:nth-of-type(2),
-  .section:nth-of-type(3) { 
+  .services,
+  .newsletter { 
     color: #0d1123;
   }
 
-  .section:nth-of-type(2) {
+  .services {
     background-color: #fff;
   }
 
-  .section:nth-of-type(3) {
+  .newsletter {
     background-color: #ffd0fa;
     padding-bottom: 0;
   }
 
-  .section:nth-of-type(4) {
-    background-color: #120d42;
-  }
-
-  .section h2 {
+  h2 {
     text-transform: uppercase;
     font-size: 1rem;
     font-weight: 800;
@@ -141,7 +130,7 @@ const services = [
     padding: 0 0.5625rem;
   }
 
-  .links-wrapper {
+  .service-links {
     margin: 0 -1rem;
   }
 
@@ -151,7 +140,7 @@ const services = [
   }
 
   @media screen and (min-width: 48em) {
-    .section:nth-of-type(1) {
+    .hero {
       flex-direction: row;
     }
 
@@ -190,11 +179,7 @@ const services = [
   }
 
   @media screen and (min-width: 62em) {
-    .section {
-      padding: 2rem 2rem 4rem;
-    }
-
-    .links-wrapper {
+    .service-links {
       margin: 0 -2rem;
     }
   }
@@ -210,12 +195,7 @@ const services = [
   }
 
   @media screen and (min-width: 90em) {
-    .section {
-      gap: 2rem;
-      padding: 4rem;
-    }
-
-    .links-wrapper {
+    .service-links {
       margin: 0 -4rem;
     }
   }

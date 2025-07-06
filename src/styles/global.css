@@ -68,12 +68,21 @@ ul {
   list-style-type: none;
 }
 
+.section {
+  margin-top: -2rem;
+  border-radius: 1.875rem 1.875rem 0 0;
+  padding: 1.5rem 1rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 .btn {
   display: block;
   width: 100%;
   background-color: #0771ea;
   border-radius: 1000px;
-  padding: 1.375rem 0;
+  padding: 1.25rem 0;
   font-weight: 800;
   font-size: 1.25rem;
   line-height: 1;
@@ -104,5 +113,18 @@ svg[role="img"] {
   .btn {
     width: fit-content;
     padding: 1rem 1.5rem;
+  }
+}
+
+@media screen and (min-width: 62em) {
+  .section {
+    padding: 2rem 2rem 4rem;
+  }
+}
+
+@media screen and (min-width: 90em) {
+  .section {
+    gap: 2rem;
+    padding: 4rem;
   }
 }
