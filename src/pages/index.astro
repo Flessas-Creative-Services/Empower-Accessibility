@@ -148,6 +148,10 @@ const services = [
       max-width: 70%;
     }
 
+    .hero-txt .lead-txt {
+      max-width: unset;
+    }
+
     .hero-txt {
       flex: 1 1 auto;
       max-width: 80ch;
@@ -185,12 +189,18 @@ const services = [
   }
 
   @media screen and (min-width: 75em) {
+    .hero.section {
+      padding-top: 4rem;
+      padding-bottom: 8rem;
+    }
+
     .lead-txt {
       max-width: 55%;
+      font-size: 4rem;
     }
 
     .hero-img {
-      flex: 0 0 25%;
+      flex: 0 0 30%;
     }
   }
 
