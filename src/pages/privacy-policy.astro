@@ -1,0 +1,88 @@
+---
+import InnerPagesLayout from "../layouts/InnerPagesLayout.astro";
+import OpeningContent from "../components/OpeningContent.astro";
+import ContentBlock from "../components/ContentBlock.astro";
+import ContentCTA from "../components/ContentCTA.astro";
+
+const page = 'Privacy Policy';
+---
+
+<InnerPagesLayout page={page}>
+  <h1 slot="page-heading">Privacy Policy</h1>
+  <OpeningContent>
+    <Fragment>
+      <p>At Empower Accessibility, we take privacy seriously. This policy outlines how we collect, use, protect, and disclose your personal information in accordance with the General Data Protection Regulation (GDPR) and the Australian Privacy Act 1988 (Cth).</p>
+    </Fragment>
+  </OpeningContent>
+  <ContentBlock>
+    <Fragment>
+      <h2>Information We Collect</h2>
+      <ul>
+        <li>Name and Contact details</li>
+        <li>Job title and Organization</li>
+        <li>Emails and messages you send</li>
+        <li>Website usage data (e.g., via cookies or analytics tools)</li>
+      </ul>
+      <p class="bold">We do not knowingly collect sensitive personal data unless explicitly required and with your consent.</p>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h2>How We Use Your Data</h2>
+      <ul>
+        <li>To deliver services and respond to inquiries</li>
+        <li>To send updates (only if you opt in)</li>
+        <li>To improve our services and site experience</li>
+        <li>To meet legal or contractual obligations</li>
+      </ul>
+      <p class="bold">We do not sell or rent your data.</p>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h2>Legal Basis</h2>
+      <p>We process personal data on the basis of:</p>
+      <ul>
+        <li>Consent</li>
+        <li>Contract performance</li>
+        <li>Legal obligation</li>
+        <li>Legitimate interest</li>
+      </ul>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h2>Data Rights</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Access or correct your information</li>
+        <li>Request deletion</li>
+        <li>Withdraw consent</li>
+        <li>Object to processing</li>
+        <li>Lodge a complaint</li>
+      </ul>
+      <p><span class="bold">Contact:</span> <a href="info@empoweraccessibility.com" class="light-link">info@empoweraccessibility.com</a></p>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h2>Cross-Border Transfers</h2>
+      <p>Your data may be stored in the U.S., Australia, or other jurisdictions. We take appropriate steps to safeguard your data wherever it’s processed.</p>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h2>Cookies and Tracking</h2>
+      <p>We use cookies to enhance functionality and collect analytics. You may disable them in your browser settings.</p>
+    </Fragment>
+  </ContentBlock>
+  <ContentCTA>
+    <Fragment>
+      <h2>Ongoing Commitment</h2>
+      <p>This policy was published on [Insert date]. It will be reviewed annually or when significant changes occur.</p>
+      <div class="bold">
+        <p class="highlight">Compliance: Meets GDPR and Australian Privacy Act 1988 (Cth)</p>
+      </div>
+    </Fragment>
+  </ContentCTA>
+</InnerPagesLayout>

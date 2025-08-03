@@ -1,0 +1,49 @@
+---
+import InnerPagesLayout from "../layouts/InnerPagesLayout.astro";
+import OpeningContent from "../components/OpeningContent.astro";
+import ContentBlock from "../components/ContentBlock.astro";
+import ContactForm from "../components/ContactForm.astro";
+
+const page = 'Contact';
+---
+
+<InnerPagesLayout page={page}>
+  <h1 slot="page-heading">Contact</h1>
+  <OpeningContent>
+    <Fragment>
+      <h2>Let's Build a More Accessible Future—Together</h2>
+      <p>Whether you're just getting started or looking to take your accessibility program to the next level, we're here to help. At Empower Accessibility, we partner with organizations that believe in inclusive, human-centered design and want to make a real impact.</p>
+    </Fragment>
+  </OpeningContent>
+  <ContentBlock>
+    <Fragment>
+      <p class="bold">Use the form below to:</p>
+      <ul>
+        <li>Request a consultation</li>
+        <li>Ask a question</li>
+        <li>Tell us about your project</li>
+      </ul>
+      <p class="bold">We’ll get back to you within 1-2 business days.</p>
+    </Fragment>
+  </ContentBlock>
+  <ContactForm />
+  <ContentBlock>
+    <Fragment>
+      <h3>Prefer to Talk Right Away?</h3>
+      <p class="right-away">
+        <span>Give us a call or send a text at: +1 (206) 210-4415</span>
+        <span>Or reach us by email at <a class="light-link" href="mailto:info@empoweraccessibility.com">info@empoweraccessibility.com</a></span>
+      </p>
+    </Fragment>
+  </ContentBlock>
+</InnerPagesLayout>
+
+<style>
+  .right-away {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+</style>
+
+

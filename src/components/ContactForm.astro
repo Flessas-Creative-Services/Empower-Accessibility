@@ -1,0 +1,94 @@
+---
+const projectStageOptions = ['Gathering requirements', 'Budget approved', 'Vendor shortlisting', 'Ready to start', 'Mid-project', 'Needing help post-launch', 'Ongoing support required'];
+const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2pm)', 'Late Afternoon (2pm - 5pm)', 'Evening (5pm - 7pm)', "I'm flexible - suggest a time", 'I prefer email, not meetings'];
+---
+
+<form class="contact" action="">
+  <div class="input-box">
+    <label for="name" class="bold">Full Name</label>
+    <input class="light-bg input" type="text" name="fullname" id="name" autocomplete="name" required>
+  </div>
+  <div class="input-box">
+    <label for="email" class="bold">Email</label>
+    <input class="light-bg input" type="email" name="email" id="email" autocomplete="email" required>
+  </div>
+  <div class="input-box">
+    <label for="org"><span class="bold">Organization</span> (if applicable)</label>
+    <input class="light-bg input" type="text" name="organization" id="org" autocomplete="organization">
+  </div>
+  <div class="input-box">
+    <label for="url" class="bold">Website URL</label>
+    <input class="light-bg input" type="url" pattern="https://.*" name="url" id="url" autocomplete="url" required>
+  </div>
+  <div class="input-box">
+    <label for="role" class="bold">Your Role</label>
+    <input class="light-bg input" type="text" name="role" id="role" autocomplete="organization-title" required>
+  </div>
+  <div class="input-box">
+    <label for="request" class="bold">How Can We Help You?</label>
+    <textarea class="light-bg input" name="request" id="request" rows="5" required></textarea>
+  </div>
+  <div class="input-box">
+    <label for="stage"><span class="bold">What Stage Are You In?</span> (optional)</label>
+    <div class="light-bg input">
+      <select name="stage" id="stage">
+        <option value="">Select</option>
+        {
+          projectStageOptions.map((option) => <option value={option}>{option}</option>)
+        }
+      </select>
+    </div>
+  </div>
+  <div class="input-box">
+    <label for="time" class="bold">Preferred Meeting Time</label>
+    <div class="light-bg input">
+      <select name="time" id="time" required>
+        <option value="">Select</option>
+        {
+          preferredTimeOptions.map((option) => <option value={option}>{option}</option>)
+        }
+      </select>
+    </div>
+  </div>
+  <button type="submit" class="light-bg btn">Submit Inquiry</button>
+</form>
+
+<style>
+  .contact {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .input-box label {
+    width: max-content;
+  }
+
+  .input {
+    width: 100%;
+    border: 0.125rem solid;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .input select {
+    width: 100%;
+    font: inherit;
+    letter-spacing: inherit;
+    word-spacing: inherit;
+    border: none;
+    outline: none;
+  }
+
+  @media screen and (min-width: 48em) {
+    .input-box {
+      max-width: 70%;
+    }
+  }
+</style>

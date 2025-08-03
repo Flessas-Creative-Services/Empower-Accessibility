@@ -1,0 +1,100 @@
+---
+import InnerPagesLayout from "../layouts/InnerPagesLayout.astro";
+import OpeningContent from "../components/OpeningContent.astro";
+import ContentBlock from "../components/ContentBlock.astro";
+import ContentCTA from "../components/ContentCTA.astro";
+
+const page = 'Terms of Service';
+---
+
+<InnerPagesLayout page={page}>
+  <h1 slot="page-heading">Terms of Service</h1>
+  <OpeningContent>
+    <Fragment>
+      <p>By using our website or services, you agree to the following terms. If you do not accept these terms, please refrain from using our services.</p>
+    </Fragment>
+  </OpeningContent>
+  <ContentBlock>
+    <Fragment>
+      <h2>Who We Are</h2>
+      <p>Empower Accessibility is a consultancy based in Australia and the U.S., providing accessibility services globally. <span class="bold">Contact:</span> <a href="info@empoweraccessibility.com" class="light-link">info@empoweraccessibility.com</a></p>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h2>Our Services</h2>
+      <p>We provide:</p>
+      <ul>
+        <li>Accessibility audits and consulting</li>
+        <li>Training and documentation support</li>
+        <li>Strategy, design, and policy writing</li>
+        <li>Testing, research, and inclusive development</li>
+      </ul>
+      <p class="bold">Each engagement is governed by a written agreement or proposal.</p>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h2>Your Use of the Site</h2>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Disrupt or attempt to breach our systems</li>
+        <li>Use our site for illegal or harmful purposes</li>
+        <li>Copy, reproduce, or misuse our content</li>
+      </ul>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h2>Intellectual Property</h2>
+      <p>All site content is owned by Empower Accessibility or used with permission. Please don’t reuse materials without our written consent.</p>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h2>Confidentiality</h2>
+      <p>We treat client communications and data as confidential unless explicitly agreed otherwise.</p>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h2>Liability Disclaimer</h2>
+      <p>To the fullest extent allowed by law:</p>
+      <ul>
+        <li>We’re not liable for indirect or incidental damages</li>
+        <li>Our total liability is limited to the amount paid for the service in question</li>
+      </ul>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h2>No Guarantees of Legal Compliance</h2>
+      <p>We help clients improve accessibility but do not guarantee legal compliance or immunity from legal action.</p>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h2>Governing Law</h2>
+      <p>Depending on your location:</p>
+      <ul>
+        <li>Australia-based users: Laws of Victoria, Australia</li>
+        <li>U.S.-based users: Laws of Maryland, USA</li>
+      </ul>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h2>Accessibility</h2>
+      <p>Our Accessibility Statement outlines our full accessibility practices. You can <a href="/accessibility" class="light-link">view it here</a>. If you face barriers while using this site, contact <a href="info@empoweraccessibility.com" class="light-link">info@empoweraccessibility.com</a></p>
+    </Fragment>
+  </ContentBlock>
+  <ContentCTA>
+    <Fragment>
+      <h2>Ongoing Commitment</h2>
+      <p>This policy was published on [Insert date]. It will be reviewed annually or when significant changes occur.</p>
+      <div class="bold">
+        <p class="highlight">Compliance: Meets applicable contract, accessibility, and consumer protection standards.</p>
+      </div>
+    </Fragment>
+  </ContentCTA>
+</InnerPagesLayout>

@@ -19,9 +19,10 @@ const { page } = Astro.props;
     <title>{page} - Empower Accessibility</title>
   </head>
   <body>
+    <a href="#main" class="dark-bg skip btn">Skip to Content</a>
     <Header currPage={page} />
     {/* use page label for main landmark on homepage since it isn't immediately followed by a heading */}
-    <main 
+    <main id="main"
       {...(page.toLowerCase() === "home" ? {"aria-label": page} : "")}
     >
       <slot />

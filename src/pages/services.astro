@@ -1,0 +1,89 @@
+---
+import ServicesImage from "../assets/services.svg";
+
+import InnerPagesLayout from "../layouts/InnerPagesLayout.astro";
+import OpeningContent from "../components/OpeningContent.astro";
+import ContentBlock from "../components/ContentBlock.astro";
+import ImageContentBlock from "../components/ImageContentBlock.astro";
+import ContentCTA from "../components/ContentCTA.astro";
+
+const page = 'Services';
+---
+
+<InnerPagesLayout page={page}>
+  <h1 slot="page-heading">Our Services</h1>
+  <OpeningContent>
+    <Fragment>
+      <h2>Building accessibility into every layer of your organization</h2>
+      <p>At Empower Accessibility, we partner with teams to create digital environments that work for everyone. Our services are designed to be practical, strategic, and people-focused. Whether you need a single training or a comprehensive accessibility program, we offer support that helps you move forward with confidence.</p>
+    </Fragment>
+  </OpeningContent>
+  <ImageContentBlock>
+    <Fragment>
+      <ContentBlock>
+        <Fragment>
+          <h3 id="audits">Accessibility Audits</h3>
+          <p>We conduct detailed audits of websites, applications, digital documents, and tools to identify accessibility barriers. Our process includes manual testing, code reviews, and assistive technology checks. You receive clear, prioritized recommendations along with practical next steps for remediation.</p>
+        </Fragment>
+      </ContentBlock>
+      <ContentBlock>
+        <Fragment>
+          <h3 id="consulting">Strategic Consulting</h3>
+          <p>We help organizations build or strengthen accessibility programs that are sustainable and aligned with your mission. Our consulting services include support with governance, policy development, process integration, procurement accessibility, team workflows, and culture change. We meet you where you are and help you plan for long-term success.</p>
+        </Fragment>
+      </ContentBlock>
+    </Fragment>
+    <ServicesImage aria-hidden="true" slot="img-block" />
+  </ImageContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h3 id="elearning">eLearning Development</h3>
+      <p>We design and develop accessible online learning experiences that reach and resonate with diverse learners. Whether you need internal training, onboarding modules, or compliance content, we create custom eLearning that is inclusive, interactive, and built to scale.</p>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h3 id="training">Training and Workshops</h3>
+      <p>We deliver training that builds skills, deepens understanding, and drives organizational change. </p>
+      <h4>Our offerings include:</h4>
+      <ul class="service-list">
+        <li>Accessibility training for staff, content creators, and teams to build inclusive skills and meet compliance goals.</li>
+        <li>Developer training on accessible code patterns, semantic structure, keyboard support, and testing with assistive tech</li>
+        <li>Hands-on workshops for developers and technical teams to troubleshoot, build, and fix real accessibility issues</li>
+        <li>Executive briefings that connect accessibility to business strategy, risk, and innovation</li>
+        <li>Train-the-trainer programs to equip internal champions to lead accessibility education</li>
+        <li>Every training is customized to your team’s goals, tools, and experience level</li>
+      </ul>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h3 id="writing">Content Writing and Inclusive Communication</h3>
+      <p>We help organizations communicate clearly and inclusively across digital platforms. Our services include content audits, plain language writing, accessibility-focused copywriting, and support with documentation, learning materials, and internal messaging.</p>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h3 id="remediation">Remediation Support</h3>
+      <p>We support your team in fixing accessibility issues with confidence and clarity. Our remediation services include code review, technical guidance, content rewrites, document fixes, and implementation support. We collaborate directly with developers, designers, and content teams to ensure sustainable progress.</p>
+    </Fragment>
+  </ContentBlock>
+  <ContentCTA>
+    <Fragment>
+      <h2>Let’s Make Accessibility Work for Everyone</h2>
+      <p>Whether you're building from the ground up or improving what already exists, we’re here to support your journey. Our work is grounded in expertise, collaboration, and a strong belief in the power of access to transform systems and lives.</p>
+      <a href="/contact/" class="light-bg btn">Get In Touch</a>
+    </Fragment>
+  </ContentCTA>
+</InnerPagesLayout>
+
+<style>
+  @media screen and (min-width: 62em) {
+    .service-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 1.5rem;
+      column-gap: 3rem;
+    }
+  }
+</style>

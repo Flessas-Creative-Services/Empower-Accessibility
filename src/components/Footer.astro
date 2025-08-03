@@ -1,6 +1,9 @@
 ---
 import Logo from '../assets/logo.svg';
 import ExternalLinkIcon from '../assets/external-link.svg';
+import navLinks from '../data/navlinks.json';
+import socialLinks from '../data/sociallinks.json';
+import NewsletterSignupForm from './NewsletterSignupForm.astro';
 ---
 
 <footer class="footer section">
@@ -12,33 +15,26 @@ import ExternalLinkIcon from '../assets/external-link.svg';
     </div>
     <nav aria-label="Footer">
       <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/services/">Services</a></li>
-        <li><a href="/talks/">Talks</a></li>
-        <li><a href="/blog/">Blog</a></li>
-        <li><a href="/contact/">Contact</a></li>
+        {navLinks.map((link) => (
+          <li>
+            <a href={link.to}>{link.text}</a>
+          </li>
+        ))}
       </ul>
     </nav>
     <ul class="socials">
-      <li>
-        <a href="https://bsky.app/profile/empower-a11y.bsky.social">
-          Bluesky
-          <ExternalLinkIcon aria-hidden="true" class="ext-link" />
-        </a>
-      </li>
-      <li>
-        <a href="https://www.linkedin.com/company/empower-accessibility">
-          LinkedIn
-          <ExternalLinkIcon aria-hidden="true" class="ext-link" />
-        </a>
-      </li>
-      <li>
-        <a href="https://www.instagram.com/empower_accessibility/#">
-          Instagram
-          <ExternalLinkIcon aria-hidden="true" class="ext-link" />
-        </a>
-      </li>
+      {socialLinks.map((social) => (
+          <li>
+            <a href={social.link}>
+              {social.platform}
+              <ExternalLinkIcon aria-hidden="true" class="ext-link" />
+            </a>
+          </li>
+        ))}
     </ul>
+  </div>
+  <div class="newsletter-signup">
+    <NewsletterSignupForm />
   </div>
   <small>
     <span class="fine-print">
@@ -62,7 +58,7 @@ import ExternalLinkIcon from '../assets/external-link.svg';
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: 2.5rem;
   }
 
   .cta p {
@@ -72,9 +68,9 @@ import ExternalLinkIcon from '../assets/external-link.svg';
 
   .footer li {
     width: max-content;
-    margin-bottom: 0.875rem;
+    margin-bottom: 1rem;
     border-bottom: 0.0625rem solid currentColor;
-    padding: 0.125rem 0.0625rem;
+    padding: 0.25rem 0.0625rem;
     font-size: 1.1rem;
     font-weight: 300;
     line-height: 1;
@@ -88,10 +84,14 @@ import ExternalLinkIcon from '../assets/external-link.svg';
     display: none;
   }
 
+  .newsletter-signup {
+    padding: 2.5rem 0;
+  }
+
   .footer small {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
     font-size: 0.75rem;
     font-weight: 300;
   }
@@ -119,12 +119,16 @@ import ExternalLinkIcon from '../assets/external-link.svg';
   @media screen and (min-width: 48em) {
     .content {
       display: grid;
-      grid-template: auto 1fr / 40% 1fr;
+      grid-template: auto 1fr / 45% 1fr;
       gap: 1rem;
     }
 
     .cta {
       grid-row: 1 / span 2;
+    }
+
+    .cta p {
+      font-size: 1.25rem;
     }
 
     nav ul {
@@ -144,8 +148,8 @@ import ExternalLinkIcon from '../assets/external-link.svg';
       display: flex;
       justify-content: flex-end;
       border-color: #42427c;
-      padding: 0.75rem 1rem;
-      font-size: 1.2rem;
+      padding: 0.5rem 0.75rem;
+      font-size: 1rem;
     }
 
     .socials a {
@@ -155,28 +159,31 @@ import ExternalLinkIcon from '../assets/external-link.svg';
     }
 
     .ext-link {
-      --icon-size: 1rem;
+      --icon-size: 0.75rem;
       display: block;
       width: var(--icon-size);
       height: var(--icon-size);
     }
 
+    .newsletter-signup {
+      border-top: 0.0625rem solid #42427c;
+      border-bottom: 0.0625rem solid #42427c;
+    }
+
     .footer small {
       flex-direction: row;
-      border-top: 0.0625rem solid #42427c;
-      padding: 1rem;
-      justify-content: center;
+      padding: 1rem 0;
+      justify-content: flex-end;
     }
   }
 
-  @media screen and (min-width: 60em) {
+  @media screen and (min-width: 62em) {
     .cta p {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
     }
 
     .socials li {
       width: 30%;
-      font-size: 1.25rem;
     }
 
     nav ul {
@@ -185,8 +192,13 @@ import ExternalLinkIcon from '../assets/external-link.svg';
     }
 
     .footer small {
-      padding: 1.5rem;
-      justify-content: flex-end;
+      padding: 1.5rem 0;
+    }
+  }
+
+  @media screen and (min-width: 80em) {
+    .content {
+      grid-template-columns: 40% 1fr;
     }
   }
 </style>

@@ -1,0 +1,61 @@
+---
+import AccessibilityImage from "../assets/accessibility.svg";
+
+import InnerPagesLayout from "../layouts/InnerPagesLayout.astro";
+import OpeningContent from "../components/OpeningContent.astro";
+import ContentBlock from "../components/ContentBlock.astro";
+import ImageContentBlock from "../components/ImageContentBlock.astro";
+import ContentCTA from "../components/ContentCTA.astro";
+
+const page = 'Accessibility';
+---
+
+<InnerPagesLayout page={page}>
+  <h1 slot="page-heading">Accessibility</h1>
+  <OpeningContent>
+    <Fragment>
+      <h2>Accessibility Statement</h2>
+      <p>At Empower Accessibility, our mission is rooted in digital inclusion. We are committed to ensuring that our website and digital statements are accessible to everyone, including people with disabilities. This statement outlines our accessibility commitment and practices.</p>
+    </Fragment>
+  </OpeningContent>
+  <ImageContentBlock>
+    <Fragment>
+      <ContentBlock>
+        <Fragment>
+          <h3>Compliance Status</h3>
+          <p>This website is fully compliant with the Web Content Accessibility Guidelines (WCAG) 2.1, Level AA. That means: Content is perceivable, operable, understandable, and robust. The site supports keyboard navigation, screen readers, and zoom up to 400%. All interactive elements have accessible names, roles, and states. Our site has been designed and developed with accessibility in mind from the ground up.</p>
+        </Fragment>
+      </ContentBlock>
+      <ContentBlock>
+        <Fragment>
+          <h3>Accessibility Testing</h3>
+          <p>We test and maintain accessibility using: Manual testing with screen readers (NVDA, VoiceOver, TalkBack), Keyboard-only navigation checks, Automated auditing tools (axe, Lighthouse), Internal reviews conducted by accessibility professionals. Testing is conducted against WCAG 2.1 Level AA criteria and best practices from EN 301 549.</p>
+        </Fragment>
+      </ContentBlock>
+    </Fragment>
+    <AccessibilityImage aria-hidden="true" slot="img-block" />
+  </ImageContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h3>Feedback and Support</h3>
+      <p>We welcome your feedback and are committed to providing accessible alternatives if needed. If you encounter any accessibility barriers, or require content in a different format, please contact us: <a class="light-link" href="mailto:info@empoweraccessibility.com">info@empoweraccessibility.com</a> or text or call +1 (253) 271-2167. We aim to respond within 5 business days.</p>
+    </Fragment>
+  </ContentBlock>
+  <ContentBlock>
+    <Fragment>
+      <h3>Enforcement Procedure (EU Visitors)</h3>
+      <p>If you are in the European Union and are dissatisfied with our response to an accessibility request, you may escalate the matter to your national enforcement body. <a class="light-link" href="https://ec.europa.eu/social/main.jsp?catId=1202">Learn more about it</a>.</p>
+    </Fragment>
+  </ContentBlock>
+  <ContentCTA>
+    <Fragment>
+      <h2>Ongoing Commitment</h2>
+      <p>This statement was prepared on [Insert date of publication] and reviewed on the same date. It will be reassessed annually or whenever significant changes are made to the website.</p>
+      <div class="bold">
+        <p class="highlight">Date of publication: [Insert date of publication]</p>
+        <p class="highlight">Last reviewed: [Insert date of publication]</p>
+        <p class="highlight">Compliance status: Fully compliant with WCAG 2.1 AA</p>
+      </div>
+    </Fragment>
+  </ContentCTA>
+</InnerPagesLayout>

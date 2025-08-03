@@ -35,6 +35,17 @@
   display: none !important;
 }
 
+.skip {
+  position: absolute;
+  z-index: 2;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.skip:focus-visible {
+  transform: translateY(1rem);
+}
+
 html,
 body {
   min-height: 100vh;
@@ -53,9 +64,14 @@ button {
   cursor: pointer;
 }
 
+input,
 button,
 a {
   color: inherit;
+}
+
+a.light-link {
+  color: #0866d3;
 }
 
 button:focus-visible,
@@ -66,6 +82,10 @@ a:focus-visible {
 
 ul {
   list-style-type: none;
+}
+
+.bold {
+  font-weight: 800;
 }
 
 .section {
@@ -80,27 +100,35 @@ ul {
 .btn {
   display: block;
   width: 100%;
-  background-color: #0771ea;
+  background-color: #0866d3;
   border-radius: 1000px;
-  padding: 1.25rem 0;
+  border: 0;
+  padding: 1rem 0;
   font-weight: 800;
-  font-size: 1.25rem;
+  font-size: 1rem;
   line-height: 1;
   color: #fff;
   text-align: center;
   text-decoration: none;
 }
 
-.btn:focus-visible {
+/* :focus-within for select dropdown */
+.btn:focus-visible,
+.input:focus-visible,
+.input:focus-within {
   outline: 0.1875rem solid;
   outline-offset: 0.1875rem;
 }
 
-.btn.light-bg:focus-visible {
-  outline-color: #0771ea;
+.btn.light-bg:focus-visible,
+.input.light-bg:focus-visible,
+.input.light-bg:focus-within {
+  outline-color: #0866d3;
 }
 
-.btn.dark-bg:focus-visible {
+.btn.dark-bg:focus-visible,
+.input.dark-bg:focus-visible,
+.input.dark-bg:focus-within {
   outline-color: #fff;
 }
 
@@ -118,11 +146,13 @@ svg[role="img"] {
 
 @media screen and (min-width: 62em) {
   .section {
-    padding: 2rem 2rem 4rem;
+    margin-top: -4rem;
+    border-radius: 3.75rem 3.75rem 0 0;
+    padding: 4rem 2rem 4rem;
   }
 }
 
-@media screen and (min-width: 90em) {
+@media screen and (min-width: 80em) {
   .section {
     gap: 2rem;
     padding: 4rem;

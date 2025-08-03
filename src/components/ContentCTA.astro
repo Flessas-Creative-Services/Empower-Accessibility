@@ -1,0 +1,54 @@
+---
+
+---
+
+<div class="content-cta-wrapper">
+  <div class="content-cta"><slot /></div>
+</div>
+
+<style is:global>
+  .content-cta-wrapper {
+    margin: 0 -1rem;
+    background-color: #faeaf9;
+  }
+
+  .content-cta {
+    max-width: 80ch;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .content-cta h2 {
+    font-weight: 800;
+    font-size: 1.25rem;
+  }
+
+  .content-cta p {
+    font-size: 1.5rem;
+  }
+
+  .content-cta p.highlight {
+    font-size: 1.2rem;
+  }
+
+  @media screen and (min-width: 62em) {
+    .content-cta-wrapper {
+      margin: 1.5rem 0 0;
+      border-radius: 1.5rem;
+    }
+    .content-cta {
+      width: 80%;
+      margin: 0 auto;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  @media screen and (min-width: 80em) {
+    .content-cta {
+      width: 60%;
+    }
+  }
+</style>

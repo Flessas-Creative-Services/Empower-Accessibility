@@ -1,0 +1,64 @@
+---
+
+---
+
+<form action="" class="signup">
+  <p class="bold">Sign up for our newsletter</p>
+  <div class="input-box">
+    <label for="email" class="bold">Enter your email address</label>
+    <input class="dark-bg input" type="email" name="email" id="email" autocomplete="email" required>
+  </div>
+  <button type="submit" class="dark-bg btn">Subscribe Now</button>
+</form>
+
+<style>
+  .signup {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .signup p {
+    font-size: 1.25rem;
+  }
+
+  .input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .input-box label {
+    width: max-content;
+  }
+
+  .input {
+    width: 100%;
+    border: 0.125rem solid;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  @media screen and (min-width: 48em) {
+    .input-box {
+      max-width: 70%;
+    }
+  }
+
+  @media screen and (min-width: 60em) {
+    .signup {
+      flex-direction: row;
+      align-items: flex-end;
+      gap: 1rem;
+    }
+
+    .signup p {
+      align-self: center;
+      flex: 1;
+    }
+
+    .input-box {
+      min-width: 50%;
+    }
+  }
+</style>

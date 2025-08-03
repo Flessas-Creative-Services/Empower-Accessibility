@@ -1,27 +1,12 @@
 ---
 import Logo from '../assets/logo.svg';
 import MenuButton from './MenuButton.tsx';
+import navLinks from '../data/navlinks.json';
 
 interface Props {
 	currPage: string;
 }
 const { currPage } = Astro.props;
-const navLinks = [{
-  to: '/',
-  text: 'Home',
-}, {
-  to: '/services/',
-  text: 'Services',
-}, {
-  to: '/talks/',
-  text: 'Talks',
-}, {
-  to: '/blog/',
-  text: 'Blog',
-}, {
-  to: '/contact/',
-  text: 'Contact',
-}];
 ---
 
 <header>

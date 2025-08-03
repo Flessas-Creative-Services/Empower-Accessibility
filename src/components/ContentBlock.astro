@@ -1,0 +1,32 @@
+---
+
+---
+
+<div class="content-block">
+  <slot />
+</div>
+
+<style is:global>
+  .content-block {
+    max-width: 80ch;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .content-block h2,
+  .content-block h3,
+  .content-block h4 {
+    font-weight: 800;
+  }
+
+  .content-block h2,
+  .content-block h3 {
+    font-size: 1.5rem;
+  }
+
+  .content-block h4,
+  .content-block p {
+    font-size: 1.25rem;
+  }
+</style>

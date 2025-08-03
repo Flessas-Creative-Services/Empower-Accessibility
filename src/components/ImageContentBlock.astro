@@ -1,0 +1,37 @@
+---
+
+---
+
+<div class="img-content-block">
+  <slot />
+  <div class="img-block">
+    <slot name="img-block" />
+  </div>
+</div>
+
+<style is:global>
+  .img-content-block {
+    display: contents;
+  }
+
+  .img-block svg {
+    display: none;
+  }
+
+  @media screen and (min-width: 80em) {
+    .img-content-block {
+      display: grid;
+      grid-template-columns: 1fr 35%;
+      gap: 2rem;
+    }
+
+    .img-block {
+      grid-row: 1 / 3;
+      grid-column: 2;
+    }
+
+    .img-block svg {
+      display: block;
+    }
+  }
+</style>
