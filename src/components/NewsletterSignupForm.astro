@@ -1,15 +1,85 @@
 ---
-
+import CloseIcon from "../assets/close.svg";
 ---
 
-<form action="" class="signup">
+<form class="signup" novalidate>
   <p class="bold">Sign up for our newsletter</p>
   <div class="input-box">
+    <!-- hidden fields to capture page title and url -->
+    <input type="hidden" name="pageUri" value={Astro.url.href} />
+    <input type="hidden" name="pageName" value={Astro.url.pathname} />
     <label for="email" class="bold">Enter your email address</label>
     <input class="dark-bg input" type="email" name="email" id="email" autocomplete="email" required>
   </div>
   <button type="submit" class="dark-bg btn">Subscribe Now</button>
 </form>
+<dialog>
+  <p></p>
+  <button type="button" autofocus>
+    <span class="visually-hidden">Close</span>
+    <CloseIcon aria-hidden="true" />
+  </button>
+</dialog>
+
+<script>
+  import { actions, isInputError } from "astro:actions";
+
+  const form = document.querySelector("form.signup") as HTMLFormElement;
+  const formInputContainer = form.querySelector("div.input-box") as HTMLElement;
+  const formInput = form.querySelector("input") as HTMLInputElement;
+
+  const dialog = document.querySelector("form.signup + dialog") as HTMLDialogElement;
+  const dialogTextContainer = dialog.querySelector("p") as HTMLParagraphElement;
+  const closeDialogBtn = dialog.querySelector("button") as HTMLButtonElement;
+
+  const clearPrevErrMsg = () => {
+    if (!formInput.hasAttribute("aria-invalid")) return;
+    formInput.removeAttribute("aria-invalid");
+    formInput.removeAttribute("aria-describedby");
+    formInput.nextElementSibling?.remove();
+  }
+
+  const showCurrErrMsg = (errId: string, errMsg: string) => {
+    const errContainer = document.createElement("div");
+    errContainer.id = errId;
+    errContainer.classList.add("show-err");
+    errContainer.textContent = errMsg;
+    formInputContainer.append(errContainer);
+    formInput.setAttribute("aria-invalid", "true");
+    formInput.setAttribute("aria-describedby", errId);
+    formInput.focus();
+  }
+
+  const showDialog = (dialogText: string) => {
+    dialogTextContainer.textContent = dialogText;
+    dialog.showModal();
+  }
+
+  closeDialogBtn.addEventListener("click", () => {
+    dialog.close();
+  });
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const { error } = await actions.newsletter(formData);
+    clearPrevErrMsg();
+    if (error) {
+      console.log(error);
+
+      const errId = "err-msg";
+      let errMsg;
+      if (isInputError(error) && error.fields?.email) {
+        errMsg = error.fields.email[0];
+      } else {
+        errMsg = "Oops! Something went wrong. Please try again later."
+      }
+      showCurrErrMsg(errId, errMsg!);
+    } else {
+      showDialog("Thanks for subscribing to our newsletter!");
+    }
+  });
+</script>
 
 <style>
   .signup {

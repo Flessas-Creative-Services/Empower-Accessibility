@@ -1,6 +1,6 @@
 import { useState } from "react";
-import OpenMenuIcon from "../assets/open-menu.svg?react";
-import CloseMenuIcon from "../assets/close-menu.svg?react";
+import OpenMenuIcon from "../assets/hamburger.svg?react";
+import CloseMenuIcon from "../assets/close.svg?react";
 
 export default function MenuButton({ classes }: { classes: string }) {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
