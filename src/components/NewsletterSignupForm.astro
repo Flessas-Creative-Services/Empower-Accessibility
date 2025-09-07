@@ -8,12 +8,12 @@ import CloseIcon from "../assets/close.svg";
     <!-- hidden fields to capture page title and url -->
     <input type="hidden" name="pageUri" value={Astro.url.href} />
     <input type="hidden" name="pageName" value={Astro.url.pathname} />
-    <label for="email" class="bold">Enter your email address</label>
-    <input class="dark-bg input" type="email" name="email" id="email" autocomplete="email" required>
+    <label for="newsletter-email" class="bold">Enter your email address</label>
+    <input class="dark-bg input" type="email" name="email" id="newsletter-email" autocomplete="email" required>
   </div>
   <button type="submit" class="dark-bg btn">Subscribe Now</button>
 </form>
-<dialog>
+<dialog class="signup-success">
   <p></p>
   <button type="button" autofocus>
     <span class="visually-hidden">Close</span>
@@ -109,9 +109,53 @@ import CloseIcon from "../assets/close.svg";
     padding: 0.5rem;
   }
 
+  .signup-success:open {
+    position: fixed;
+    width: min(40ch, 100% - 3rem);
+    background-color: #fff;
+    border: 0;
+    border-radius: 0.625rem;
+    margin: auto;
+    padding: 1rem;
+    font-weight: 500;
+    font-size: 1rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .signup-success button {
+    --btn-size: 1.5rem;
+    align-self: flex-start;
+    display: flex;
+    width: var(--btn-size);
+    height: var(--btn-size);
+    border-radius: 0.125rem;
+    border: 0;
+    outline-offset: 0;
+  }
+
+  .signup-success::backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+
+  @media screen and (min-width: 30em) {
+    .signup-success:open {
+      gap: 0;
+      justify-content: space-between;
+    }
+
+    .signup-success button {
+      align-self: center;
+    }
+  }
+
   @media screen and (min-width: 48em) {
     .input-box {
       max-width: 70%;
+    }
+
+    .signup-success {
+      font-size: 1.25rem;
     }
   }
 
