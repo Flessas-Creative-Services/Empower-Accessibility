@@ -141,15 +141,12 @@ svg[role="img"] {
   position: relative;
 }
 
-.show-err {
-  position: absolute;
-  top: 100%;
+.err-msg {
   width: 100%;
   background-color: #fff;
   padding: 0.25rem;
   font-weight: 600;
   color: #970f53;
-  z-index: 5;
 }
 
 @media screen and (min-width: 48em) {

@@ -4,17 +4,17 @@ import CloseIcon from "../assets/close.svg";
 
 <form class="signup" novalidate>
   <p class="bold">Sign up for our newsletter</p>
+  <!-- hidden fields to capture page title and url -->
+  <input type="hidden" name="pageUri" value={Astro.url.href} />
+  <input type="hidden" name="pageName" value={Astro.url.pathname} />
   <div class="input-box">
-    <!-- hidden fields to capture page title and url -->
-    <input type="hidden" name="pageUri" value={Astro.url.href} />
-    <input type="hidden" name="pageName" value={Astro.url.pathname} />
     <label for="newsletter-email" class="bold">Enter your email address</label>
     <input class="dark-bg input" type="email" name="email" id="newsletter-email" autocomplete="email" required>
   </div>
   <button type="submit" class="dark-bg btn">Subscribe Now</button>
 </form>
 <dialog class="signup-success">
-  <p></p>
+  <p>Thanks for subscribing to our newsletter!</p>
   <button type="button" autofocus>
     <span class="visually-hidden">Close</span>
     <CloseIcon aria-hidden="true" />
@@ -24,50 +24,49 @@ import CloseIcon from "../assets/close.svg";
 <script>
   import { actions, isInputError } from "astro:actions";
 
-  const form = document.querySelector("form.signup") as HTMLFormElement;
-  const formInputContainer = form.querySelector("div.input-box") as HTMLElement;
-  const formInput = form.querySelector("input") as HTMLInputElement;
+  const signupForm = document.querySelector("form.signup") as HTMLFormElement;
+  const emailInputWrapper = signupForm.querySelector('div.input-box:has(input[name="email"])')!;
+  const emailInput = emailInputWrapper?.querySelector("input")!;
 
-  const dialog = document.querySelector("form.signup + dialog") as HTMLDialogElement;
-  const dialogTextContainer = dialog.querySelector("p") as HTMLParagraphElement;
-  const closeDialogBtn = dialog.querySelector("button") as HTMLButtonElement;
+  const signupDialog = document.querySelector("form.signup + dialog") as HTMLDialogElement;
+  const signupCloseBtn = signupDialog.querySelector("button") as HTMLButtonElement;
 
   const clearPrevErrMsg = () => {
-    if (!formInput.hasAttribute("aria-invalid")) return;
-    formInput.removeAttribute("aria-invalid");
-    formInput.removeAttribute("aria-describedby");
-    formInput.nextElementSibling?.remove();
+    if (!emailInput.hasAttribute("aria-invalid")) return;
+    emailInput.removeAttribute("aria-invalid");
+    emailInput.removeAttribute("aria-describedby");
+    emailInput.nextElementSibling?.remove();
   }
 
   const showCurrErrMsg = (errId: string, errMsg: string) => {
     const errContainer = document.createElement("div");
     errContainer.id = errId;
-    errContainer.classList.add("show-err");
+    errContainer.classList.add("err-msg");
+    // inline styles to take it out of the flex container
+    errContainer.setAttribute("style", "position: absolute; top: 100%; z-index: 5;");
     errContainer.textContent = errMsg;
-    formInputContainer.append(errContainer);
-    formInput.setAttribute("aria-invalid", "true");
-    formInput.setAttribute("aria-describedby", errId);
-    formInput.focus();
+    emailInputWrapper.append(errContainer);
+    emailInput.setAttribute("aria-invalid", "true");
+    emailInput.setAttribute("aria-describedby", errId);
+    emailInput.focus();
   }
 
-  const showDialog = (dialogText: string) => {
-    dialogTextContainer.textContent = dialogText;
-    dialog.showModal();
+  const showDialog = () => {
+    signupDialog.showModal();
   }
 
-  closeDialogBtn.addEventListener("click", () => {
-    dialog.close();
+  signupCloseBtn.addEventListener("click", () => {
+    signupDialog.close();
   });
 
-  form?.addEventListener("submit", async (e) => {
+  signupForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const formData = new FormData(form);
-    const { error } = await actions.newsletter(formData);
+    const formData = new FormData(signupForm);
+    const { error } = await actions.forms.newsletter(formData);
     clearPrevErrMsg();
     if (error) {
       console.log(error);
-
-      const errId = "err-msg";
+      const errId = "signup-email-err-msg";
       let errMsg;
       if (isInputError(error) && error.fields?.email) {
         errMsg = error.fields.email[0];
@@ -76,7 +75,7 @@ import CloseIcon from "../assets/close.svg";
       }
       showCurrErrMsg(errId, errMsg!);
     } else {
-      showDialog("Thanks for subscribing to our newsletter!");
+      showDialog();
     }
   });
 </script>

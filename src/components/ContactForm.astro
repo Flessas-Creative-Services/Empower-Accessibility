@@ -1,37 +1,47 @@
 ---
+import CloseIcon from "../assets/close.svg";
+
 const projectStageOptions = ['Gathering requirements', 'Budget approved', 'Vendor shortlisting', 'Ready to start', 'Mid-project', 'Needing help post-launch', 'Ongoing support required'];
 const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2pm)', 'Late Afternoon (2pm - 5pm)', 'Evening (5pm - 7pm)', "I'm flexible - suggest a time", 'I prefer email, not meetings'];
 ---
 
-<form class="contact" action="">
+<form class="contact" novalidate>
+  <p>Note that all form fields are required unless otherwise indicated.</p>
+  <!-- hidden fields to capture page title and url -->
+  <input type="hidden" name="pageUri" value={Astro.url.href} />
+  <input type="hidden" name="pageName" value={Astro.url.pathname} />
   <div class="input-box">
-    <label for="name" class="bold">Full Name</label>
-    <input class="light-bg input" type="text" name="fullname" id="name" autocomplete="name" required>
+    <label for="firstname" class="bold">First Name</label>
+    <input class="light-bg input" type="text" name="firstname" id="firstname" autocomplete="given-name" required>
   </div>
   <div class="input-box">
-    <label for="email" class="bold">Email</label>
-    <input class="light-bg input" type="email" name="email" id="email" autocomplete="email" required>
+    <label for="lastname" class="bold">Last Name</label>
+    <input class="light-bg input" type="text" name="lastname" id="lastname" autocomplete="family-name" required>
+  </div>
+  <div class="input-box">
+    <label for="contact-email" class="bold">Email</label>
+    <input class="light-bg input" type="email" name="email" id="contact-email" autocomplete="email" required>
   </div>
   <div class="input-box">
     <label for="org"><span class="bold">Organization</span> (if applicable)</label>
     <input class="light-bg input" type="text" name="organization" id="org" autocomplete="organization">
   </div>
   <div class="input-box">
-    <label for="url" class="bold">Website URL</label>
-    <input class="light-bg input" type="url" pattern="https://.*" name="url" id="url" autocomplete="url" required>
+    <label for="url"><span class="bold">Website URL</span> (optional)</label>
+    <input class="light-bg input" type="url" name="url" id="url" autocomplete="url">
   </div>
   <div class="input-box">
-    <label for="role" class="bold">Your Role</label>
-    <input class="light-bg input" type="text" name="role" id="role" autocomplete="organization-title" required>
+    <label for="role"><span class="bold">Your Role</span> (optional)</label>
+    <input class="light-bg input" type="text" name="role" id="role" autocomplete="organization-title">
   </div>
   <div class="input-box">
     <label for="request" class="bold">How Can We Help You?</label>
     <textarea class="light-bg input" name="request" id="request" rows="5" required></textarea>
   </div>
   <div class="input-box">
-    <label for="stage"><span class="bold">What Stage Are You In?</span> (optional)</label>
+    <label for="currstage"><span class="bold">What Stage Are You In?</span> (optional)</label>
     <div class="light-bg input">
-      <select name="stage" id="stage">
+      <select name="currstage" id="currstage">
         <option value="">Select</option>
         {
           projectStageOptions.map((option) => <option value={option}>{option}</option>)
@@ -50,8 +60,81 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
       </select>
     </div>
   </div>
+  <div class="input-box">
+    <label for="timezone" class="bold">Your Timezone</label>
+    <input class="light-bg input" type="text" name="timezone" id="timezone" required>
+  </div>
   <button type="submit" class="light-bg btn">Submit Inquiry</button>
 </form>
+<dialog class="enquiry-success">
+  <p>Thanks for your message! Our team has received it and will respond as soon as possible. Together, we can make digital spaces accessible to all.</p>
+  <button type="button" autofocus>
+    <span class="visually-hidden">Close</span>
+    <CloseIcon aria-hidden="true" />
+  </button>
+</dialog>
+
+<script>
+  import { actions, isInputError } from "astro:actions";
+
+  const contactForm = document.querySelector("form.contact") as HTMLFormElement;
+
+  const contactDialog = document.querySelector("form.contact + dialog") as HTMLDialogElement;
+  const contactCloseBtn = contactDialog.querySelector("button") as HTMLButtonElement;
+
+  const clearPrevErrMsg = () => {
+    contactForm.querySelectorAll("div.input-box").forEach((fieldWrapper) => {
+      const field = fieldWrapper.querySelector("input, textarea, select")!;
+      if (!field.hasAttribute("aria-invalid")) return;
+      field.removeAttribute("aria-invalid");
+      field.removeAttribute("aria-describedby");
+      fieldWrapper.querySelector("div.err-msg")?.remove();
+    })
+  }
+
+  const showCurrErrMsg = (errField: string, errMsg: string) => {
+    const errId = `contact-${errField}-err-msg`;
+    const fieldWrapper = contactForm.querySelector(`div.input-box:has(*[name="${errField}"])`)!;
+    const field = fieldWrapper.querySelector("input, textarea, select")!;
+    const errContainer = document.createElement("div");
+    errContainer.id = errId;
+    errContainer.classList.add("err-msg");
+    errContainer.textContent = errMsg;
+    fieldWrapper.append(errContainer);
+    field.setAttribute("aria-invalid", "true");
+    field.setAttribute("aria-describedby", errId);
+  }
+
+  const showDialog = () => {
+    contactDialog.showModal();
+  }
+
+  contactCloseBtn.addEventListener("click", () => {
+    contactDialog.close();
+  });
+
+  contactForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(contactForm);
+    const { error } = await actions.forms.contact(formData);
+    clearPrevErrMsg();
+    if (error && isInputError(error)) {
+      console.log(error);
+      let firstFieldErrName;
+      for (const [field, message] of Object.entries(error.fields)) {
+        if (!firstFieldErrName) {
+          firstFieldErrName = field;
+        }
+        showCurrErrMsg(field, message[0]);
+      }
+      // set focus to the first field in error
+      const firstErrField = contactForm.querySelector(`*[name="${firstFieldErrName}"]`) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+      firstErrField?.focus();
+    } else {
+      showDialog();
+    }
+  });
+</script>
 
 <style>
   .contact {
@@ -86,9 +169,53 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
     outline: none;
   }
 
+  .enquiry-success:open {
+    position: fixed;
+    width: min(40ch, 100% - 3rem);
+    background-color: #fff;
+    border: 0;
+    border-radius: 0.625rem;
+    margin: auto;
+    padding: 1rem;
+    font-weight: 500;
+    font-size: 1rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .enquiry-success button {
+    --btn-size: 1.5rem;
+    align-self: flex-start;
+    display: flex;
+    width: var(--btn-size);
+    height: var(--btn-size);
+    border-radius: 0.125rem;
+    border: 0;
+    outline-offset: 0;
+  }
+
+  .enquiry-success::backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+
+  @media screen and (min-width: 30em) {
+    .enquiry-success:open {
+      gap: 0;
+      justify-content: space-between;
+    }
+
+    .enquiry-success button {
+      align-self: center;
+    }
+  }
+
   @media screen and (min-width: 48em) {
     .input-box {
       max-width: 70%;
+    }
+
+    .enquiry-success {
+      font-size: 1.25rem;
     }
   }
 </style>
