@@ -171,7 +171,7 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
 
   .enquiry-success:open {
     position: fixed;
-    width: min(40ch, 100% - 3rem);
+    max-width: min(40ch, 100% - 3rem);
     background-color: #fff;
     border: 0;
     border-radius: 0.625rem;
@@ -180,12 +180,13 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
     font-weight: 500;
     font-size: 1rem;
     display: flex;
+    flex-direction: column;
     gap: 0.5rem;
   }
 
   .enquiry-success button {
     --btn-size: 1.5rem;
-    align-self: flex-start;
+    align-self: center;
     display: flex;
     width: var(--btn-size);
     height: var(--btn-size);
@@ -196,17 +197,6 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
 
   .enquiry-success::backdrop {
     background-color: rgba(0, 0, 0, 0.75);
-  }
-
-  @media screen and (min-width: 30em) {
-    .enquiry-success:open {
-      gap: 0;
-      justify-content: space-between;
-    }
-
-    .enquiry-success button {
-      align-self: center;
-    }
   }
 
   @media screen and (min-width: 48em) {
