@@ -112,6 +112,10 @@ ul {
   text-decoration: none;
 }
 
+.btn:hover {
+  background-color: #0771ea;
+}
+
 /* :focus-within for select dropdown */
 .btn:focus-visible,
 .input:focus-visible,

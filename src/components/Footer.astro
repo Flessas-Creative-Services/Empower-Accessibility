@@ -84,6 +84,12 @@ import NewsletterSignupForm from './NewsletterSignupForm.astro';
     display: none;
   }
 
+  nav li:hover,
+  .socials li:hover {
+    color: #acd3ff;
+    border-color: currentColor;
+  }
+
   .newsletter-signup {
     padding: 2.5rem 0;
   }
@@ -163,6 +169,7 @@ import NewsletterSignupForm from './NewsletterSignupForm.astro';
       display: block;
       width: var(--icon-size);
       height: var(--icon-size);
+      fill: currentColor;
     }
 
     .newsletter-signup {
