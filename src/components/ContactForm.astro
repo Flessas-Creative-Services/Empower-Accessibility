@@ -78,31 +78,30 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
   import { actions, isInputError } from "astro:actions";
 
   const contactForm = document.querySelector("form.contact") as HTMLFormElement;
+  const contactFields = [...(contactForm.querySelectorAll("div.input-box input, div.input-box textarea, div.input-box select"))] as Array<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>;
 
   const contactDialog = document.querySelector("form.contact + dialog") as HTMLDialogElement;
   const contactCloseBtn = contactDialog.querySelector("button") as HTMLButtonElement;
 
   const clearPrevErrMsg = () => {
-    contactForm.querySelectorAll("div.input-box").forEach((fieldWrapper) => {
-      const field = fieldWrapper.querySelector("input, textarea, select")!;
+    contactFields.forEach((field) => {
       if (!field.hasAttribute("aria-invalid")) return;
       field.removeAttribute("aria-invalid");
       field.removeAttribute("aria-describedby");
-      fieldWrapper.querySelector("div.err-msg")?.remove();
+      field.closest("div.input-box")?.querySelector("div.err-msg")?.remove();
     })
   }
 
-  const showCurrErrMsg = (errField: string, errMsg: string) => {
-    const errId = `contact-${errField}-err-msg`;
-    const fieldWrapper = contactForm.querySelector(`div.input-box:has(*[name="${errField}"])`)!;
-    const field = fieldWrapper.querySelector("input, textarea, select")!;
+  const showCurrErrMsg = (errFieldName: string, errMsg: string) => {
+    const errField = contactFields.find((field) => field.name === errFieldName)!;
+    const errId = `contact-${errFieldName}-err-msg`;
     const errContainer = document.createElement("div");
     errContainer.id = errId;
     errContainer.classList.add("err-msg");
     errContainer.textContent = errMsg;
-    fieldWrapper.append(errContainer);
-    field.setAttribute("aria-invalid", "true");
-    field.setAttribute("aria-describedby", errId);
+    errField.closest("div.input-box")?.append(errContainer);
+    errField.setAttribute("aria-invalid", "true");
+    errField.setAttribute("aria-describedby", errId);
   }
 
   const showDialog = () => {
@@ -131,6 +130,7 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
       const firstErrField = contactForm.querySelector(`*[name="${firstFieldErrName}"]`) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
       firstErrField?.focus();
     } else {
+      contactFields.forEach((field) => field.value = "");
       showDialog();
     }
   });
