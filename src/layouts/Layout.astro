@@ -3,6 +3,12 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
+declare global {
+  interface Window {
+    dataLayer?: any[];
+  }
+}
+
 interface Props {
 	page: string;
 }
@@ -15,13 +21,31 @@ const { page } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content="{Astro.generator}" />
+    <meta name="generator" content={Astro.generator} />
     <title>{page} - Empower Accessibility</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z4Y55Y0VY3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(...args: any[]){window.dataLayer?.push(args);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Z4Y55Y0VY3');
+    </script>
+
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "tpwficmjie");
+    </script>
   </head>
   <body>
     <a href="#main" class="dark-bg skip btn">Skip to Content</a>
     <Header currPage={page} />
-    {/* use page label for main landmark on homepage since it isn't immediately followed by a heading */}
+    <!-- use page label for main landmark on homepage since it isn't immediately followed by a heading -->
     <main id="main"
       {...(page.toLowerCase() === "home" ? {"aria-label": page} : "")}
     >

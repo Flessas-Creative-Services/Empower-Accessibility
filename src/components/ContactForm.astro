@@ -1,6 +1,4 @@
 ---
-import CloseIcon from "../assets/close.svg";
-
 const projectStageOptions = ['Gathering requirements', 'Budget approved', 'Vendor shortlisting', 'Ready to start', 'Mid-project', 'Needing help post-launch', 'Ongoing support required'];
 const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2pm)', 'Late Afternoon (2pm - 5pm)', 'Evening (5pm - 7pm)', "I'm flexible - suggest a time", 'I prefer email, not meetings'];
 ---
@@ -20,6 +18,7 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
   </div>
   <div class="input-box">
     <label for="contact-email" class="bold">Email</label>
+    <span>For example: abcde@email.com</span>
     <input class="light-bg input" type="email" name="email" id="contact-email" autocomplete="email" required>
   </div>
   <div class="input-box">
@@ -67,11 +66,9 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
   <button type="submit" class="light-bg btn">Submit Inquiry</button>
 </form>
 <dialog class="enquiry-success">
-  <p>Thanks for your message! Our team has received it and will respond as soon as possible. Together, we can make digital spaces accessible to all.</p>
-  <button type="button" autofocus>
-    <span class="visually-hidden">Close</span>
-    <CloseIcon aria-hidden="true" />
-  </button>
+  <h2>Success!</h2>
+  <p>Thanks for your message. Our team has received it and will respond as soon as possible. Together, we can make digital spaces accessible to all.</p>
+  <button type="button" class="light-bg btn" autofocus>Close</button>
 </dialog>
 
 <script>
@@ -176,23 +173,19 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
     border: 0;
     border-radius: 0.625rem;
     margin: auto;
-    padding: 1rem;
-    font-weight: 500;
-    font-size: 1rem;
+    padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
 
-  .enquiry-success button {
-    --btn-size: 1.5rem;
-    align-self: center;
-    display: flex;
-    width: var(--btn-size);
-    height: var(--btn-size);
-    border-radius: 0.125rem;
-    border: 0;
-    outline-offset: 0;
+  .enquiry-success h2 {
+    font-weight: 800;
+    font-size: 1.5rem;
+  }
+
+  .enquiry-success p {
+    font-size: 1.25rem;
   }
 
   .enquiry-success::backdrop {
@@ -202,10 +195,6 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
   @media screen and (min-width: 48em) {
     .input-box {
       max-width: 70%;
-    }
-
-    .enquiry-success {
-      font-size: 1.25rem;
     }
   }
 </style>

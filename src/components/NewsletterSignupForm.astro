@@ -1,5 +1,5 @@
 ---
-import CloseIcon from "../assets/close.svg";
+
 ---
 
 <form class="signup" novalidate>
@@ -14,11 +14,9 @@ import CloseIcon from "../assets/close.svg";
   <button type="submit" class="dark-bg btn">Subscribe Now</button>
 </form>
 <dialog class="signup-success">
-  <p>Thanks for subscribing to our newsletter!</p>
-  <button type="button" autofocus>
-    <span class="visually-hidden">Close</span>
-    <CloseIcon aria-hidden="true" />
-  </button>
+  <h2>Success!</h2>
+  <p>Thank you for subscribing to our newsletter.</p>
+  <button type="button" class="light-bg btn" autofocus>Close</button>
 </dialog>
 
 <script>
@@ -116,23 +114,19 @@ import CloseIcon from "../assets/close.svg";
     border: 0;
     border-radius: 0.625rem;
     margin: auto;
-    padding: 1rem;
-    font-weight: 500;
-    font-size: 1rem;
+    padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
 
-  .signup-success button {
-    --btn-size: 1.5rem;
-    align-self: center;
-    display: flex;
-    width: var(--btn-size);
-    height: var(--btn-size);
-    border-radius: 0.125rem;
-    border: 0;
-    outline-offset: 0;
+  .signup-success h2 {
+    font-weight: 800;
+    font-size: 1.5rem;
+  }
+
+  .signup-success p {
+    font-size: 1.25rem;
   }
 
   .signup-success::backdrop {
@@ -142,10 +136,6 @@ import CloseIcon from "../assets/close.svg";
   @media screen and (min-width: 48em) {
     .input-box {
       max-width: 70%;
-    }
-
-    .signup-success {
-      font-size: 1.25rem;
     }
   }
 
