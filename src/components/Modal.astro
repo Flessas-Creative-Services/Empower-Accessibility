@@ -1,0 +1,80 @@
+---
+interface Props {
+  isCookie?: boolean;
+}
+const { isCookie } = Astro.props;
+---
+
+<dialog class:list={["modal", { cookie: isCookie }]}>
+  <slot />
+  <div class="modal-ctrl">
+    <slot name="modal-ctrl" />
+  </div>
+</dialog>
+
+<style is:global>
+  .modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+
+  .modal:open {
+    position: fixed;
+    max-width: min(40ch, 100% - 3rem);
+    background-color: #fff;
+    border: 0;
+    margin: auto;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .modal.cookie:open {
+    margin-bottom: 0;
+    bottom: 0;
+  }
+
+  .modal h2 {
+    font-weight: 800;
+    font-size: 1.25rem;
+  }
+
+  .modal p {
+    font-size: 1rem;
+  }
+
+  .modal.cookie .modal-ctrl {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  @media screen and (min-width: 48em) {
+    .modal.cookie {
+      min-width: 100%;
+    }
+
+    .modal.cookie p {
+      max-width: min(80ch, 100% - 3rem);
+    }
+
+    .modal.cookie .modal-ctrl {
+      flex-direction: row;
+    }
+  }
+
+  @media screen and (min-width: 62em) {
+    .modal.cookie {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .modal.cookie h2 {
+      font-size: 1.5rem;
+    }
+
+    .modal.cookie p {
+      font-size: 1.25rem;
+    }
+  }
+</style>

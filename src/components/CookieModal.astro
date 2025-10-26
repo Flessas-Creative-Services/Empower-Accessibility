@@ -1,0 +1,38 @@
+---
+import Modal from '../components/Modal.astro';
+---
+
+<Modal isCookie>
+  <Fragment>
+    <h2>Our Cookies Policy</h2>
+    <p>We use cookies to make this site better for you. Some cookies are essential and others help us track how the site is used so we can improve. By clicking “Accept Cookies”, you agree to our cookie and privacy policies.</p>
+  </Fragment>
+  <Fragment slot="modal-ctrl">
+    <button type="button" class="light-bg btn" data-cookie="accepted" autofocus>Accept Cookies</button>
+    <button type="button" class="btn btn-sec" data-cookie="declined">Decline</button>
+  </Fragment>
+</Modal>
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    if (document.cookie.includes('cookieConsent=')) return;
+
+    const cookieModal = document.querySelector('dialog.modal.cookie') as HTMLDialogElement;
+    const setCookie = (value: "accepted" | "declined") => {
+      cookieModal.close();
+      document.cookie = `cookieConsent=${value}; path=/; max-age=${60 * 60 * 24 * 90}`;
+      if (value === "accepted") {
+        // Dispatch a custom event to trigger analytics loading
+        window.dispatchEvent(new Event("cookie:accepted"));
+      }
+    };
+
+    cookieModal
+    .querySelectorAll("button")
+    .forEach((btn) => btn.addEventListener("click", () => {
+      const cookie = btn.dataset.cookie as "accepted" | "declined";
+      setCookie(cookie);
+    }));
+    cookieModal.showModal();
+  });
+</script>

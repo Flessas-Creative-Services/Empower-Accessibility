@@ -116,8 +116,18 @@ ul {
   background-color: #0771ea;
 }
 
+.btn-sec {
+  background: #b4bfce;
+  color: inherit;
+}
+
+.btn-sec:hover {
+  background: #cccfe0;
+}
+
 /* :focus-within for select dropdown */
 .btn:focus-visible,
+.btn-sec:focus-visible,
 .input:focus-visible,
 .input:focus-within {
   outline: 0.1875rem solid;
