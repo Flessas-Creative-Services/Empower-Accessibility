@@ -5,7 +5,7 @@ interface Props {
 const { isCookie } = Astro.props;
 ---
 
-<dialog class:list={["modal", { cookie: isCookie }]}>
+<dialog aria-labelledby="modal-title" class:list={["modal", { cookie: isCookie }]}>
   <slot />
   <div class="modal-ctrl">
     <slot name="modal-ctrl" />
@@ -19,19 +19,25 @@ const { isCookie } = Astro.props;
 
   .modal:open {
     position: fixed;
-    max-width: min(40ch, 100% - 3rem);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(40ch, calc(100% - 3rem));
+    max-height: 90dvh; /* prevent overflowing the viewport */
+    overflow-y: auto;
     background-color: #fff;
-    border: 0;
-    margin: auto;
     padding: 2rem 1rem;
+    padding-bottom: calc(env(safe-area-inset-bottom) + 1rem);
+    padding-top: calc(env(safe-area-inset-top) + 1rem);
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
   }
 
   .modal.cookie:open {
-    margin-bottom: 0;
+    top: auto;
     bottom: 0;
+    transform: translateX(-50%);
   }
 
   .modal h2 {
@@ -51,11 +57,14 @@ const { isCookie } = Astro.props;
 
   @media screen and (min-width: 48em) {
     .modal.cookie {
-      min-width: 100%;
+      left: 0;
+      transform: none !important;
+      width: 100%; /* overrides mobile width */
+      max-width: 100%; /* reqd coz p has a max-width */
     }
 
     .modal.cookie p {
-      max-width: min(80ch, 100% - 3rem);
+      max-width: 80ch;
     }
 
     .modal.cookie .modal-ctrl {
