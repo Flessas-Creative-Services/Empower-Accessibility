@@ -1,22 +1,23 @@
 ---
-import Modal from "./Modal.astro";
+
 ---
 
 <form class="signup" novalidate>
   <p class="bold">Sign up for our newsletter</p>
+  <!-- hidden fields to capture page title and url -->
+  <input type="hidden" name="pageUri" value={Astro.url.href} />
+  <input type="hidden" name="pageName" value={Astro.url.pathname} />
   <div class="input-box">
     <label for="newsletter-email" class="bold">Enter your email address</label>
     <input class="dark-bg input" type="email" name="email" id="newsletter-email" autocomplete="email" required>
   </div>
   <button type="submit" class="dark-bg btn">Subscribe Now</button>
 </form>
-<Modal>
-  <Fragment>
-    <h2 id="modal-title">Success!</h2>
-    <p>Thank you for subscribing to our newsletter. Check your inbox for our follow-up email.</p>
-  </Fragment>
-  <button type="button" class="light-bg btn" autofocus slot="modal-ctrl">Close</button>
-</Modal>
+<dialog class="signup-success">
+  <h2>Success!</h2>
+  <p>Thank you for subscribing to our newsletter.</p>
+  <button type="button" class="light-bg btn" autofocus>Close</button>
+</dialog>
 
 <script>
   import { actions, isInputError } from "astro:actions";
@@ -25,8 +26,8 @@ import Modal from "./Modal.astro";
   const emailInputWrapper = signupForm.querySelector('div.input-box:has(input[name="email"])')!;
   const emailInput = emailInputWrapper?.querySelector("input")!;
 
-  const signupModal = document.querySelector("form.signup + dialog") as HTMLDialogElement;
-  const signupCloseBtn = signupModal.querySelector("button") as HTMLButtonElement;
+  const signupDialog = document.querySelector("form.signup + dialog") as HTMLDialogElement;
+  const signupCloseBtn = signupDialog.querySelector("button") as HTMLButtonElement;
 
   const clearPrevErrMsg = () => {
     if (!emailInput.hasAttribute("aria-invalid")) return;
@@ -48,26 +49,17 @@ import Modal from "./Modal.astro";
     emailInput.focus();
   }
 
+  const showDialog = () => {
+    signupDialog.showModal();
+  }
+
   signupCloseBtn.addEventListener("click", () => {
-    signupModal.close();
+    signupDialog.close();
   });
 
   signupForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
-    
     const formData = new FormData(signupForm);
-    
-    // Conditionally add tracking info to form data
-    const hutk = document.cookie
-      .split("; ")
-      .find((cookie) => cookie.startsWith("hubspotutk="))
-      ?.split("=")[1];
-    if (hutk) {
-      formData.append("hutk", hutk);
-      formData.append("pageUri", window.location.href);
-      formData.append("pageName", window.location.pathname);
-    }
-
     const { error } = await actions.forms.newsletter(formData);
     clearPrevErrMsg();
     if (error) {
@@ -82,7 +74,7 @@ import Modal from "./Modal.astro";
       showCurrErrMsg(errId, errMsg!);
     } else {
       emailInput.value = "";
-      signupModal.showModal();
+      showDialog();
     }
   });
 </script>
@@ -115,13 +107,39 @@ import Modal from "./Modal.astro";
     padding: 0.5rem;
   }
 
+  .signup-success:open {
+    position: fixed;
+    max-width: min(40ch, 100% - 3rem);
+    background-color: #fff;
+    border: 0;
+    border-radius: 0.625rem;
+    margin: auto;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .signup-success h2 {
+    font-weight: 800;
+    font-size: 1.5rem;
+  }
+
+  .signup-success p {
+    font-size: 1.25rem;
+  }
+
+  .signup-success::backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+
   @media screen and (min-width: 48em) {
     .input-box {
       max-width: 70%;
     }
   }
 
-  @media screen and (min-width: 62em) {
+  @media screen and (min-width: 60em) {
     .signup {
       flex-direction: row;
       align-items: flex-end;

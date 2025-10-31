@@ -12,9 +12,8 @@ export const forms = {
         .email("This is not a valid email address"),
       pageUri: z.string().url().optional(),
       pageName: z.string().optional(),
-      hutk: z.string().optional(),
     }),
-    handler: async ({ email, pageUri, pageName, hutk }) => {
+    handler: async ({ email, pageUri, pageName }) => {
       const newsletterFormId = "6c11f082-8477-498a-8660-b1c51362cb63";
       const newsletterFormUrl = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${newsletterFormId}`;
 
@@ -23,7 +22,6 @@ export const forms = {
         context: {
           pageUri,
           pageName,
-          hutk,
         },
       };
 
@@ -56,7 +54,6 @@ export const forms = {
       timezone: z.string({ message: "Please enter your timezone" }),
       pageUri: z.string().url().optional(),
       pageName: z.string().optional(),
-      hutk: z.string().optional(),
     }),
     handler: async ({
       firstname,
@@ -71,7 +68,6 @@ export const forms = {
       timezone,
       pageUri,
       pageName,
-      hutk,
     }) => {
       const contactFormId = "a88bf23b-7694-4e89-96ef-e9a36ac7fe33";
       const contactFormUrl = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${contactFormId}`;
@@ -92,7 +88,6 @@ export const forms = {
         context: {
           pageUri,
           pageName,
-          hutk,
         },
       };
 

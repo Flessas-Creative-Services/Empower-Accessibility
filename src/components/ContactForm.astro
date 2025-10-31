@@ -1,12 +1,13 @@
 ---
-import Modal from "./Modal.astro";
-
 const projectStageOptions = ['Gathering requirements', 'Budget approved', 'Vendor shortlisting', 'Ready to start', 'Mid-project', 'Needing help post-launch', 'Ongoing support required'];
 const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2pm)', 'Late Afternoon (2pm - 5pm)', 'Evening (5pm - 7pm)', "I'm flexible - suggest a time", 'I prefer email, not meetings'];
 ---
 
 <form class="contact" novalidate>
   <p>Note that all form fields are required unless otherwise indicated.</p>
+  <!-- hidden fields to capture page title and url -->
+  <input type="hidden" name="pageUri" value={Astro.url.href} />
+  <input type="hidden" name="pageName" value={Astro.url.pathname} />
   <div class="input-box">
     <label for="firstname" class="bold">First Name</label>
     <input class="light-bg input" type="text" name="firstname" id="firstname" autocomplete="given-name" required>
@@ -64,13 +65,11 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
   </div>
   <button type="submit" class="light-bg btn">Submit Inquiry</button>
 </form>
-<Modal>
-  <Fragment>
-    <h2 id="modal-title">Success!</h2>
-    <p>Thanks for your message. Our team has received it and will respond as soon as possible. Together, we can make digital spaces accessible to all.</p>
-  </Fragment>
-  <button type="button" class="light-bg btn" autofocus slot="modal-ctrl">Close</button>
-</Modal>
+<dialog class="enquiry-success">
+  <h2>Success!</h2>
+  <p>Thanks for your message. Our team has received it and will respond as soon as possible. Together, we can make digital spaces accessible to all.</p>
+  <button type="button" class="light-bg btn" autofocus>Close</button>
+</dialog>
 
 <script>
   import { actions, isInputError } from "astro:actions";
@@ -78,8 +77,8 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
   const contactForm = document.querySelector("form.contact") as HTMLFormElement;
   const contactFields = [...(contactForm.querySelectorAll("div.input-box input, div.input-box textarea, div.input-box select"))] as Array<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>;
 
-  const contactModal = document.querySelector("form.contact + dialog") as HTMLDialogElement;
-  const contactCloseBtn = contactModal.querySelector("button") as HTMLButtonElement;
+  const contactDialog = document.querySelector("form.contact + dialog") as HTMLDialogElement;
+  const contactCloseBtn = contactDialog.querySelector("button") as HTMLButtonElement;
 
   const clearPrevErrMsg = () => {
     contactFields.forEach((field) => {
@@ -102,26 +101,17 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
     errField.setAttribute("aria-describedby", errId);
   }
 
+  const showDialog = () => {
+    contactDialog.showModal();
+  }
+
   contactCloseBtn.addEventListener("click", () => {
-    contactModal.close();
+    contactDialog.close();
   });
 
   contactForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
-
     const formData = new FormData(contactForm);
-
-    // Conditionally add tracking info to form data
-    const hutk = document.cookie
-      .split("; ")
-      .find((cookie) => cookie.startsWith("hubspotutk="))
-      ?.split("=")[1];
-    if (hutk) {
-      formData.append("hutk", hutk);
-      formData.append("pageUri", window.location.href);
-      formData.append("pageName", window.location.pathname);
-    }
-
     const { error } = await actions.forms.contact(formData);
     clearPrevErrMsg();
     if (error && isInputError(error)) {
@@ -138,7 +128,7 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
       firstErrField?.focus();
     } else {
       contactFields.forEach((field) => field.value = "");
-      contactModal.showModal();
+      showDialog();
     }
   });
 </script>
@@ -174,6 +164,32 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
     word-spacing: inherit;
     border: none;
     outline: none;
+  }
+
+  .enquiry-success:open {
+    position: fixed;
+    max-width: min(40ch, 100% - 3rem);
+    background-color: #fff;
+    border: 0;
+    border-radius: 0.625rem;
+    margin: auto;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .enquiry-success h2 {
+    font-weight: 800;
+    font-size: 1.5rem;
+  }
+
+  .enquiry-success p {
+    font-size: 1.25rem;
+  }
+
+  .enquiry-success::backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
   }
 
   @media screen and (min-width: 48em) {
