@@ -60,13 +60,9 @@ const services = [
     <p class="lead-txt">Building accessibility into every layer of your organization</p>
     <div class="service-links">
       {
-        services.map((service) => {
-          const Icon = service.icon;
-          return (
-          <ServiceLink to={service.to} text={service.text}>
-            <Icon slot='img' />
-          </ServiceLink>
-        )})
+        services.map((service) => 
+          <ServiceLink to={service.to} text={service.text} icon={service.icon} />
+        )
       }
     </div>
   </div>
