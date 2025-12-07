@@ -9,7 +9,14 @@
   <input type="hidden" name="pageName" value={Astro.url.pathname} />
   <div class="input-box">
     <label for="newsletter-email" class="bold">Enter your email address</label>
-    <input class="dark-bg input" type="email" name="email" id="newsletter-email" autocomplete="email" required>
+    <input
+      class="dark-bg input"
+      type="email"
+      name="email"
+      id="newsletter-email"
+      autocomplete="email"
+      required
+    />
   </div>
   <button type="submit" class="dark-bg btn">Subscribe Now</button>
 </form>
@@ -20,60 +27,60 @@
 </dialog>
 
 <script>
-  import { actions, isInputError } from "astro:actions";
+  import { actions, isInputError } from 'astro:actions';
 
-  const signupForm = document.querySelector("form.signup") as HTMLFormElement;
+  const signupForm = document.querySelector('form.signup') as HTMLFormElement;
   const emailInputWrapper = signupForm.querySelector('div.input-box:has(input[name="email"])')!;
-  const emailInput = emailInputWrapper?.querySelector("input")!;
+  const emailInput = emailInputWrapper?.querySelector('input')!;
 
-  const signupDialog = document.querySelector("form.signup + dialog") as HTMLDialogElement;
-  const signupCloseBtn = signupDialog.querySelector("button") as HTMLButtonElement;
+  const signupDialog = document.querySelector('form.signup + dialog') as HTMLDialogElement;
+  const signupCloseBtn = signupDialog.querySelector('button') as HTMLButtonElement;
 
   const clearPrevErrMsg = () => {
-    if (!emailInput.hasAttribute("aria-invalid")) return;
-    emailInput.removeAttribute("aria-invalid");
-    emailInput.removeAttribute("aria-describedby");
+    if (!emailInput.hasAttribute('aria-invalid')) return;
+    emailInput.removeAttribute('aria-invalid');
+    emailInput.removeAttribute('aria-describedby');
     emailInput.nextElementSibling?.remove();
-  }
+  };
 
   const showCurrErrMsg = (errId: string, errMsg: string) => {
-    const errContainer = document.createElement("div");
+    const errContainer = document.createElement('div');
     errContainer.id = errId;
-    errContainer.classList.add("err-msg");
+    errContainer.classList.add('err-msg');
     // inline styles to take it out of the flex container
-    errContainer.setAttribute("style", "position: absolute; top: 100%; z-index: 5;");
+    errContainer.setAttribute('style', 'position: absolute; top: 100%; z-index: 5;');
     errContainer.textContent = errMsg;
     emailInputWrapper.append(errContainer);
-    emailInput.setAttribute("aria-invalid", "true");
-    emailInput.setAttribute("aria-describedby", errId);
+    emailInput.setAttribute('aria-invalid', 'true');
+    emailInput.setAttribute('aria-describedby', errId);
     emailInput.focus();
-  }
+  };
 
   const showDialog = () => {
     signupDialog.showModal();
-  }
+  };
 
-  signupCloseBtn.addEventListener("click", () => {
+  signupCloseBtn.addEventListener('click', () => {
     signupDialog.close();
   });
 
-  signupForm?.addEventListener("submit", async (e) => {
+  signupForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(signupForm);
     const { error } = await actions.forms.newsletter(formData);
     clearPrevErrMsg();
     if (error) {
       console.log(error);
-      const errId = "signup-email-err-msg";
+      const errId = 'signup-email-err-msg';
       let errMsg;
       if (isInputError(error) && error.fields?.email) {
         errMsg = error.fields.email[0];
       } else {
-        errMsg = "Oops! Something went wrong. Please try again later."
+        errMsg = 'Oops! Something went wrong. Please try again later.';
       }
       showCurrErrMsg(errId, errMsg!);
     } else {
-      emailInput.value = "";
+      emailInput.value = '';
       showDialog();
     }
   });
