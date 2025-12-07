@@ -1,6 +1,21 @@
 ---
-const projectStageOptions = ['Gathering requirements', 'Budget approved', 'Vendor shortlisting', 'Ready to start', 'Mid-project', 'Needing help post-launch', 'Ongoing support required'];
-const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2pm)', 'Late Afternoon (2pm - 5pm)', 'Evening (5pm - 7pm)', "I'm flexible - suggest a time", 'I prefer email, not meetings'];
+const projectStageOptions = [
+  'Gathering requirements',
+  'Budget approved',
+  'Vendor shortlisting',
+  'Ready to start',
+  'Mid-project',
+  'Needing help post-launch',
+  'Ongoing support required',
+];
+const preferredTimeOptions = [
+  'Morning (9am - 12pm)',
+  'Early Afternoon (12pm - 2pm)',
+  'Late Afternoon (2pm - 5pm)',
+  'Evening (5pm - 7pm)',
+  "I'm flexible - suggest a time",
+  'I prefer email, not meetings',
+];
 ---
 
 <form class="contact" novalidate>
@@ -10,28 +25,61 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
   <input type="hidden" name="pageName" value={Astro.url.pathname} />
   <div class="input-box">
     <label for="firstname" class="bold">First Name</label>
-    <input class="light-bg input" type="text" name="firstname" id="firstname" autocomplete="given-name" required>
+    <input
+      class="light-bg input"
+      type="text"
+      name="firstname"
+      id="firstname"
+      autocomplete="given-name"
+      required
+    />
   </div>
   <div class="input-box">
     <label for="lastname" class="bold">Last Name</label>
-    <input class="light-bg input" type="text" name="lastname" id="lastname" autocomplete="family-name" required>
+    <input
+      class="light-bg input"
+      type="text"
+      name="lastname"
+      id="lastname"
+      autocomplete="family-name"
+      required
+    />
   </div>
   <div class="input-box">
     <label for="contact-email" class="bold">Email</label>
     <span>For example: abcde@email.com</span>
-    <input class="light-bg input" type="email" name="email" id="contact-email" autocomplete="email" required>
+    <input
+      class="light-bg input"
+      type="email"
+      name="email"
+      id="contact-email"
+      autocomplete="email"
+      required
+    />
   </div>
   <div class="input-box">
     <label for="org"><span class="bold">Organization</span> (if applicable)</label>
-    <input class="light-bg input" type="text" name="organization" id="org" autocomplete="organization">
+    <input
+      class="light-bg input"
+      type="text"
+      name="organization"
+      id="org"
+      autocomplete="organization"
+    />
   </div>
   <div class="input-box">
     <label for="url"><span class="bold">Website URL</span> (optional)</label>
-    <input class="light-bg input" type="url" name="url" id="url" autocomplete="url">
+    <input class="light-bg input" type="url" name="url" id="url" autocomplete="url" />
   </div>
   <div class="input-box">
     <label for="role"><span class="bold">Your Role</span> (optional)</label>
-    <input class="light-bg input" type="text" name="role" id="role" autocomplete="organization-title">
+    <input
+      class="light-bg input"
+      type="text"
+      name="role"
+      id="role"
+      autocomplete="organization-title"
+    />
   </div>
   <div class="input-box">
     <label for="request" class="bold">How Can We Help You?</label>
@@ -42,9 +90,7 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
     <div class="light-bg input">
       <select name="currstage" id="currstage">
         <option value="">Select</option>
-        {
-          projectStageOptions.map((option) => <option value={option}>{option}</option>)
-        }
+        {projectStageOptions.map((option) => <option value={option}>{option}</option>)}
       </select>
     </div>
   </div>
@@ -53,63 +99,68 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
     <div class="light-bg input">
       <select name="time" id="time" required>
         <option value="">Select</option>
-        {
-          preferredTimeOptions.map((option) => <option value={option}>{option}</option>)
-        }
+        {preferredTimeOptions.map((option) => <option value={option}>{option}</option>)}
       </select>
     </div>
   </div>
   <div class="input-box">
     <label for="timezone" class="bold">Your Timezone</label>
-    <input class="light-bg input" type="text" name="timezone" id="timezone" required>
+    <input class="light-bg input" type="text" name="timezone" id="timezone" required />
   </div>
   <button type="submit" class="light-bg btn">Submit Inquiry</button>
 </form>
 <dialog class="enquiry-success">
   <h2>Success!</h2>
-  <p>Thanks for your message. Our team has received it and will respond as soon as possible. Together, we can make digital spaces accessible to all.</p>
+  <p>
+    Thanks for your message. Our team has received it and will respond as soon as possible.
+    Together, we can make digital spaces accessible to all.
+  </p>
   <button type="button" class="light-bg btn" autofocus>Close</button>
 </dialog>
 
 <script>
-  import { actions, isInputError } from "astro:actions";
+  import { actions, isInputError } from 'astro:actions';
 
-  const contactForm = document.querySelector("form.contact") as HTMLFormElement;
-  const contactFields = [...(contactForm.querySelectorAll("div.input-box input, div.input-box textarea, div.input-box select"))] as Array<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>;
+  const contactForm = document.querySelector('form.contact') as HTMLFormElement;
+  const contactFields = [
+    ...contactForm.querySelectorAll(
+      'div.input-box input, div.input-box textarea, div.input-box select'
+    ),
+  ] as Array<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>;
 
-  const contactDialog = document.querySelector("form.contact + dialog") as HTMLDialogElement;
-  const contactCloseBtn = contactDialog.querySelector("button") as HTMLButtonElement;
+  const contactDialog = document.querySelector('form.contact + dialog') as HTMLDialogElement;
+  const contactCloseBtn = contactDialog.querySelector('button') as HTMLButtonElement;
 
   const clearPrevErrMsg = () => {
     contactFields.forEach((field) => {
-      if (!field.hasAttribute("aria-invalid")) return;
-      field.removeAttribute("aria-invalid");
-      field.removeAttribute("aria-describedby");
-      field.closest("div.input-box")?.querySelector("div.err-msg")?.remove();
-    })
-  }
+      if (!field.hasAttribute('aria-invalid')) return;
+      field.removeAttribute('aria-invalid');
+      field.removeAttribute('aria-describedby');
+      field.closest('div.input-box')?.querySelector('div.err-msg')?.remove();
+    });
+  };
 
   const showCurrErrMsg = (errFieldName: string, errMsg: string) => {
     const errField = contactFields.find((field) => field.name === errFieldName)!;
     const errId = `contact-${errFieldName}-err-msg`;
-    const errContainer = document.createElement("div");
+    const errContainer = document.createElement('div');
     errContainer.id = errId;
-    errContainer.classList.add("err-msg");
+    errContainer.classList.add('err-msg');
     errContainer.textContent = errMsg;
-    errField.closest("div.input-box")?.append(errContainer);
-    errField.setAttribute("aria-invalid", "true");
-    errField.setAttribute("aria-describedby", errId);
-  }
+    errField.closest('div.input-box')?.append(errContainer);
+    errField.setAttribute('aria-invalid', 'true');
+    errField.setAttribute('aria-describedby', errId);
+  };
 
   const showDialog = () => {
     contactDialog.showModal();
-  }
+  };
 
-  contactCloseBtn.addEventListener("click", () => {
+  contactCloseBtn.addEventListener('click', () => {
     contactDialog.close();
   });
 
-  contactForm?.addEventListener("submit", async (e) => {
+  contactForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(contactForm);
     const { error } = await actions.forms.contact(formData);
@@ -124,10 +175,13 @@ const preferredTimeOptions = ['Morning (9am - 12pm)', 'Early Afternoon (12pm - 2
         showCurrErrMsg(field, message[0]);
       }
       // set focus to the first field in error
-      const firstErrField = contactForm.querySelector(`*[name="${firstFieldErrName}"]`) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+      const firstErrField = contactForm.querySelector(`*[name="${firstFieldErrName}"]`) as
+        | HTMLInputElement
+        | HTMLTextAreaElement
+        | HTMLSelectElement;
       firstErrField?.focus();
     } else {
-      contactFields.forEach((field) => field.value = "");
+      contactFields.forEach((field) => (field.value = ''));
       showDialog();
     }
   });

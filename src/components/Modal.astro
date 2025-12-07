@@ -5,7 +5,7 @@ interface Props {
 const { isCookie } = Astro.props;
 ---
 
-<dialog aria-labelledby="modal-title" class:list={["modal", { cookie: isCookie }]}>
+<dialog aria-labelledby="modal-title" class:list={['modal', { cookie: isCookie }]}>
   <slot />
   <div class="modal-ctrl">
     <slot name="modal-ctrl" />
