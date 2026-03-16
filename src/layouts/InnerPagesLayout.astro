@@ -1,8 +1,8 @@
 ---
-import Layout from "./Layout.astro";
+import Layout from './Layout.astro';
 
 interface Props {
-	page: string;
+  page: string;
 }
 const { page } = Astro.props;
 ---
@@ -13,7 +13,7 @@ const { page } = Astro.props;
       <slot name="page-heading" />
     </div>
     <div class="content section">
-      <slot/>
+      <slot />
     </div>
   </div>
 </Layout>

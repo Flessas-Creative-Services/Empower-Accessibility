@@ -16,32 +16,32 @@ const services = [
   {
     to: '/services#audits',
     text: 'Accessibility Audits',
-    icon: AuditsImage
+    icon: AuditsImage,
   },
   {
     to: '/services#consulting',
     text: 'Strategic Consulting',
-    icon: ConsultingImage
+    icon: ConsultingImage,
   },
   {
     to: '/services#elearning',
     text: 'eLearning Development',
-    icon: ELearningImage
+    icon: ELearningImage,
   },
   {
     to: '/services#training',
     text: 'Training and Workshops',
-    icon: TrainingImage
+    icon: TrainingImage,
   },
   {
     to: '/services#writing',
     text: 'Content Writing and Inclusive Communication',
-    icon: WritingImage
+    icon: WritingImage,
   },
   {
     to: '/services#remediation',
     text: 'Remediation Support',
-    icon: RemediationImage
+    icon: RemediationImage,
   },
 ];
 ---
@@ -49,8 +49,12 @@ const services = [
 <Layout page={page}>
   <div class="hero section">
     <div class="hero-txt">
-      <p class="lead-txt">Let’s create a future where access opens doors, not just websites</h1>
-      <p class="sec-txt">Welcome to Empower Accessibility. We believe accessibility is more than compliance. It’s a catalyst for equity, inclusion, and opportunity. Our mission is to empower people and expand access to dignified work by transforming how organizations think about accessibility.</p>
+      <p class="lead-txt">Let’s create a future where access opens doors, not just websites</p>
+      <p class="sec-txt">
+        Welcome to Empower Accessibility. We believe accessibility is more than compliance. It’s a
+        catalyst for equity, inclusion, and opportunity. Our mission is to empower people and expand
+        access to dignified work by transforming how organizations think about accessibility.
+      </p>
       <a href="/contact/" class="dark-bg btn">Let's Collaborate</a>
     </div>
     <div class="hero-img"><HeroImage aria-hidden="true" /></div>
@@ -60,9 +64,9 @@ const services = [
     <p class="lead-txt">Building accessibility into every layer of your organization</p>
     <div class="service-links">
       {
-        services.map((service) => 
+        services.map((service) => (
           <ServiceLink to={service.to} text={service.text} icon={service.icon} />
-        )
+        ))
       }
     </div>
   </div>
@@ -70,8 +74,11 @@ const services = [
     <h2>What Makes Us Different</h2>
     <p class="lead-txt">We lead with empathy, integrity, and practical knowledge</p>
     <div class="diff-content">
-      <div class="diff-txt">  
-        <p class="sec-txt">We bring both experience and technical expertise to every engagement, and we focus on outcomes that matter — for your teams, your users, and your mission.</p>
+      <div class="diff-txt">
+        <p class="sec-txt">
+          We bring both experience and technical expertise to every engagement, and we focus on
+          outcomes that matter — for your teams, your users, and your mission.
+        </p>
         <a href="/contact/" class="light-bg btn">Get In Touch</a>
       </div>
       <div class="diff-img"><IllustrationImage aria-hidden="true" /></div>
@@ -87,7 +94,7 @@ const services = [
   }
 
   .services,
-  .newsletter { 
+  .newsletter {
     color: #0d1123;
   }
 

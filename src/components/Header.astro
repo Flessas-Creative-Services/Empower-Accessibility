@@ -4,7 +4,7 @@ import MenuButton from './MenuButton.tsx';
 import navLinks from '../data/navlinks.json';
 
 interface Props {
-	currPage: string;
+  currPage: string;
 }
 const { currPage } = Astro.props;
 ---
@@ -12,10 +12,12 @@ const { currPage } = Astro.props;
 <header>
   <div class="top-bar">
     {
-      currPage.toLowerCase() === "home" ? (
+      currPage.toLowerCase() === 'home' ? (
         <h1 aria-labelledby="logo home" class="logo">
           <Logo id="logo" />
-          <span id="home" hidden>Home</span>
+          <span id="home" hidden>
+            Home
+          </span>
         </h1>
       ) : (
         <div class="logo">
@@ -27,27 +29,31 @@ const { currPage } = Astro.props;
   </div>
   <nav aria-label="Main">
     <ul class="nav-links">
-      {navLinks.map((link) => (
-        <li>
-          <a 
-            href={link.to} 
-            {...(link.text.toLowerCase() === currPage.toLowerCase() ? { "aria-current": "page"} : {})}
+      {
+        navLinks.map((link) => (
+          <li>
+            <a
+              href={link.to}
+              {...(link.text.toLowerCase() === currPage.toLowerCase()
+                ? { 'aria-current': 'page' }
+                : {})}
             >
               {link.text}
             </a>
-        </li>
-      ))}
+          </li>
+        ))
+      }
     </ul>
   </nav>
 </header>
 
 <style is:global>
   header {
-		padding: 1.25rem 1rem;
+    padding: 1.25rem 1rem;
     color: #fff;
-	}
+  }
 
-  header:has(.menu-btn[aria-expanded="true"]) {
+  header:has(.menu-btn[aria-expanded='true']) {
     background-color: #fff;
     color: #120d42;
     z-index: 2;
@@ -60,38 +66,38 @@ const { currPage } = Astro.props;
   }
 
   .logo {
-		--logo-width: 9.375rem;
+    --logo-width: 9.375rem;
     --logo-height: 2.5rem;
     display: block;
     width: var(--logo-width);
     height: var(--logo-height);
-	}
+  }
 
   .menu-btn {
-		--btn-width: 1.875rem;
+    --btn-width: 1.875rem;
     --btn-height: 1.5rem;
     display: block;
     width: var(--btn-width);
     height: var(--btn-height);
     border: none;
-	}
+  }
 
-  .top-bar:has(.menu-btn[aria-expanded="false"]) + nav[aria-label="Main"] {
-		display: none;
-	}
+  .top-bar:has(.menu-btn[aria-expanded='false']) + nav[aria-label='Main'] {
+    display: none;
+  }
 
-  nav[aria-label="Main"] {
+  nav[aria-label='Main'] {
     margin: 3rem 0 0.75rem;
   }
 
-  nav[aria-label="Main"] ul {
+  nav[aria-label='Main'] ul {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
   }
 
-  nav[aria-label="Main"] a {
+  nav[aria-label='Main'] a {
     padding: 0 0.25rem;
     font-weight: 800;
     font-size: 1.25rem;
@@ -99,7 +105,7 @@ const { currPage } = Astro.props;
     text-decoration: none;
   }
 
-  nav[aria-label="Main"] a[aria-current="page"] {
+  nav[aria-label='Main'] a[aria-current='page'] {
     border-bottom: 0.25rem solid currentColor;
   }
 
@@ -127,21 +133,21 @@ const { currPage } = Astro.props;
       display: none;
     }
 
-    nav[aria-label="Main"] {
+    nav[aria-label='Main'] {
       display: block !important;
       margin: 0;
       height: fit-content;
     }
 
-    nav[aria-label="Main"] ul {
+    nav[aria-label='Main'] ul {
       flex-direction: row;
     }
 
-    nav[aria-label="Main"] a {
+    nav[aria-label='Main'] a {
       font-weight: 400;
     }
 
-    nav[aria-label="Main"] a:hover {
+    nav[aria-label='Main'] a:hover {
       color: #acd3ff;
     }
   }
@@ -159,16 +165,16 @@ const { currPage } = Astro.props;
 </style>
 
 <script>
-  const menuBtn = document.querySelector(".menu-btn") as HTMLButtonElement;
+  const menuBtn = document.querySelector('.menu-btn') as HTMLButtonElement;
   document.addEventListener('keydown', (e) => {
-    if (e.key !== "Escape") return;
+    if (e.key !== 'Escape') return;
     if (window.matchMedia('(min-width: 62em)').matches) return;
     if (menuBtn.getAttribute('aria-expanded') === 'true') {
       menuBtn.click();
       menuBtn.focus();
     }
   });
-  document.querySelector("header")!.addEventListener('focusout', (e) => {
+  document.querySelector('header')!.addEventListener('focusout', (e) => {
     const target = e.currentTarget as HTMLElement;
     const relatedTarget = e.relatedTarget;
     if (relatedTarget instanceof Node && !target.contains(relatedTarget)) {
@@ -176,4 +182,3 @@ const { currPage } = Astro.props;
     }
   });
 </script>
-
