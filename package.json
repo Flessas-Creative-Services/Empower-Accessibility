@@ -32,6 +32,9 @@
     "typescript": "^5.9.3",
     "vite-plugin-svgr": "^4.3.0"
   },
+  "engines": {
+    "node": "22.x"
+  },
   "overrides": {
     "path-to-regexp": "^6.2.3",
     "esbuild": "^0.25.5"
