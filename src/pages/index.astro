@@ -60,7 +60,7 @@ const services = [
     <div class="hero-img"><HeroImage aria-hidden="true" /></div>
   </div>
   <div class="services section">
-    <h2>Our Services</h2>
+    <h2 class="home-heading">Our Services</h2>
     <p class="lead-txt">Building accessibility into every layer of your organization</p>
     <div class="service-links">
       {
@@ -71,7 +71,7 @@ const services = [
     </div>
   </div>
   <div class="newsletter section">
-    <h2>What Makes Us Different</h2>
+    <h2 class="home-heading">What Makes Us Different</h2>
     <p class="lead-txt">We lead with empathy, integrity, and practical knowledge</p>
     <div class="diff-content">
       <div class="diff-txt">
@@ -87,7 +87,13 @@ const services = [
 </Layout>
 
 <style>
-  .hero.section {
+  .home-heading {
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  .hero {
     border-radius: 0;
     margin-top: 0;
     padding-top: 0.5rem;
@@ -105,12 +111,6 @@ const services = [
   .newsletter {
     background-color: #ffd0fa;
     padding-bottom: 0;
-  }
-
-  h2 {
-    text-transform: uppercase;
-    font-size: 1rem;
-    font-weight: 800;
   }
 
   .lead-txt {
@@ -192,7 +192,7 @@ const services = [
   }
 
   @media screen and (min-width: 75em) {
-    .hero.section {
+    .hero {
       padding-top: 4rem;
       padding-bottom: 8rem;
     }
