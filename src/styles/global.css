@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-family: 'Inter';
+  src: url('/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -53,7 +53,7 @@ body {
 
 body {
   background-color: #120d42;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
   line-height: 1.5;
   color: #fff;
@@ -82,6 +82,23 @@ a:focus-visible {
 
 ul {
   list-style-type: none;
+}
+
+ul:not(header *, footer *) {
+  list-style-type: disc;
+  max-width: 80ch;
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+ul:not(header *, footer *) li {
+  font-size: 1.25rem;
+}
+
+ul:not(header *, footer *) li::marker {
+  color: #da3a95;
 }
 
 .bold {
@@ -137,7 +154,7 @@ ul {
 }
 
 /* prevents tooltip display on hover */
-svg[role="img"] {
+svg[role='img'] {
   pointer-events: none;
 }
 
