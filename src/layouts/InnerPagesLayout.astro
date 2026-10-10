@@ -25,24 +25,7 @@ const { page } = Astro.props;
     display: flex;
     flex-direction: column;
   }
-
-  :global(.page ul) {
-    list-style-type: disc;
-    max-width: 80ch;
-    padding-left: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  :global(.page li) {
-    font-size: 1.25rem;
-  }
-
-  :global(.page li::marker) {
-    color: #da3a95;
-  }
-
+  
   .page-heading {
     background-color: #120d42;
     padding-top: 0.5rem;
@@ -53,7 +36,7 @@ const { page } = Astro.props;
     text-align: center;
   }
 
-  .content.section {
+  .content {
     padding-bottom: 0;
     background-color: #fff;
     color: #0d1123;
@@ -76,7 +59,7 @@ const { page } = Astro.props;
       line-height: 1.125;
     }
 
-    .content.section {
+    .content {
       padding-top: 3rem;
     }
   }
