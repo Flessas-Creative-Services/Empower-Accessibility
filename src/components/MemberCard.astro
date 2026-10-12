@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import ExternalLinkIcon from '../assets/external-link.svg';
 
 interface Props {
@@ -18,11 +19,16 @@ interface Props {
 }
 const { imageSrc, name, pronouns, role, creds, desc, highlight, highlightDesc, highlightLinks } =
   Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/team/*.{jpg,jpeg,png,webp,avif}',
+  { eager: true }
+);
 ---
 
 <div class="member">
   <div class="member-img-wrapper">
-    <Image src={import(`../assets/team/${imageSrc}`)} alt="" class="member-img" />
+    <Image src={images[`../assets/team/${imageSrc}`]?.default} alt="" class="member-img" />
   </div>
   <div class="member-details">
     <div class="member-title">
@@ -42,7 +48,13 @@ const { imageSrc, name, pronouns, role, creds, desc, highlight, highlightDesc, h
           highlightLinks.map((link) => (
             <a class="member-highlights-link light-link" href={link.to} target="_blank">
               {link.text}
-              <ExternalLinkIcon role="img" aria-label="Opens in a new tab" fill="currentColor" width={8} height={8} />
+              <ExternalLinkIcon
+                role="img"
+                aria-label="Opens in a new tab"
+                fill="currentColor"
+                width={8}
+                height={8}
+              />
             </a>
           ))
         }
