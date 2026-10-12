@@ -1,0 +1,33 @@
+---
+import InnerPagesLayout from '../layouts/InnerPagesLayout.astro';
+import OpeningContent from '../components/OpeningContent.astro';
+import TeamBlock from '../components/TeamBlock.astro';
+import ContentCTA from '../components/ContentCTA.astro';
+
+const page = 'Team';
+---
+
+<InnerPagesLayout page={page}>
+  <h1 slot="page-heading">Our Team</h1>
+  <OpeningContent>
+    <Fragment>
+      <h2>The people who open doors</h2>
+      <p>
+        Empower Accessibility is a global team of practitioners, engineers, writers, and educators
+        who believe accessibility is a catalyst for equity, inclusion, and opportunity — not a
+        checkbox. We bring lived experience and technical depth to every engagement.
+      </p>
+    </Fragment>
+  </OpeningContent>
+  <TeamBlock />
+  <ContentCTA>
+    <Fragment>
+      <h2>Want to discuss your project?</h2>
+      <p>
+        Book a time with our team — whether you're ready to start or just exploring what
+        accessibility could do for your organization, we'd love to talk.
+      </p>
+      <a href="/contact/" class="light-bg btn">Get In Touch</a>
+    </Fragment>
+  </ContentCTA>
+</InnerPagesLayout>
