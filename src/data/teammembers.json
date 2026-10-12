@@ -1,0 +1,58 @@
+[
+  {
+    "imageSrc": "jaunita.jpg",
+    "name": "Jaunita Flessas, Esq.",
+    "pronouns": ["she", "her"],
+    "role": "Founder & Principal Consultant",
+    "creds": [
+      "IAAP CPWA",
+      "IAAP ADS",
+      "APX",
+      "DHS Trusted Tester",
+      "PMP",
+      "SAFe Agilist",
+      "Maryland Bar"
+    ],
+    "desc": [
+      "An internationally recognized digital accessibility leader with more than eight years of specialized accessibility expertise and thirteen years in program management, Jaunita founded Empower Accessibility to transform how organizations think about access. She previously served as Head of Technical Accessibility at Navy Federal Credit Union, where she founded the enterprise accessibility program, led a team of twelve, and guided an Accessibility Task Force of 55+ volunteers.",
+      "Her legal background pairs with deep technical practice: she contributes to the W3C's Accessibility Guidelines, ARIA, and Accessible Platform Architectures working groups, and founded A11y-DMV, the largest accessibility meetup in the DC metro region, as well as A11y A11ies in Melbourne. She serves on the leadership team of OZeWAI, Australia's web accessibility initiative, and is passionate about a web that's free, fair, and accessible to everyone."
+    ],
+    "highlight": "Speaking highlights",
+    "highlightDesc": "CSUN Assistive Technology Conference · A11yTO · A11yCamp · Perth Web Accessibility Camp",
+    "highlightLinks": [
+      { "to": "https://www.linkedin.com/in/jaunitaflessas/", "text": "LinkedIn" },
+      { "to": "https://jaunitageorge1.github.io/personal-website/", "text": "Website" }
+    ]
+  },
+  {
+    "imageSrc": "angela.webp",
+    "name": "Angela Young",
+    "pronouns": ["they", "them"],
+    "role": "Head of Training & Awareness",
+    "creds": ["Ed.D., University of Maryland", "IAAP CPACC"],
+    "desc": [
+      "An accessibility training strategist with nearly two decades across education, learning & development, and organizational change, Angela designs learning experiences that move organizations from awareness to action. They have led enterprise accessibility training portfolios reaching tens of thousands of learners while delivering measurable business value.",
+      "Angela founded A11y With Angela, a platform focused on accessibility and inclusion. As a deaf, neurodivergent professional, they bring lived experience to every program — transforming accessibility from a checklist into a shared commitment."
+    ],
+    "highlight": "Speaking highlights",
+    "highlightDesc": "International speaker — accessibility, inclusion & workplace wellbeing",
+    "highlightLinks": [{ "to": "https://www.linkedin.com/in/dr-angela-young/", "text": "LinkedIn" }]
+  },
+  {
+    "imageSrc": "praise.jpg",
+    "name": "Praise Agbabiaka",
+    "pronouns": ["she", "her"],
+    "role": "Software Engineering Consultant",
+    "creds": ["Open-source Contributor", "IAAP Member"],
+    "desc": [
+      "A software engineer specializing in accessible software development, software architecture, and technical problem-solving, Praise helps organizations build products where accessibility is engineered into the foundations rather than retrofitted at the end. Her work spans application development, accessibility remediation, and design systems, with a focus on identifying systemic barriers and building maintainable solutions that address accessibility at its source.",
+      "Combining hands-on engineering with architectural thinking, Praise helps engineering and design teams establish accessible patterns, improve development workflows, and integrate accessibility into how software is designed, built, and maintained. She is passionate about solving complex engineering problems, building scalable systems, and making accessibility a foundational part of creating better software."
+    ],
+    "highlight": "Writing highlights",
+    "highlightDesc": "DEV Community, accessible development, architecture & remediation",
+    "highlightLinks": [
+      { "to": "https://www.linkedin.com/in/praise-agbabiaka/", "text": "LinkedIn" },
+      { "to": "https://dev.to/praiztech", "text": "DEV Community" }
+    ]
+  }
+]

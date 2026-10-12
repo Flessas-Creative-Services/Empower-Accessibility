@@ -8,6 +8,10 @@
     "text": "Services"
   },
   {
+    "to": "/team/",
+    "text": "Team"
+  },
+  {
     "to": "/talks/",
     "text": "Talks"
   },

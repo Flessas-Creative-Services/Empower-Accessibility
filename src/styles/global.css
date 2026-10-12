@@ -84,25 +84,13 @@ ul {
   list-style-type: none;
 }
 
-ul:not(header *, footer *) {
-  list-style-type: disc;
-  max-width: 80ch;
-  padding-left: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-ul:not(header *, footer *) li {
-  font-size: 1.25rem;
-}
-
-ul:not(header *, footer *) li::marker {
-  color: #da3a95;
-}
-
 .bold {
   font-weight: 800;
+}
+
+.body-content {
+  max-width: 1800px;
+  margin: 0 auto;
 }
 
 .section {

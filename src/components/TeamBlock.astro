@@ -1,0 +1,16 @@
+---
+import teamMembers from '../data/teammembers.json';
+import MemberCard from '../components/MemberCard.astro';
+---
+
+<div class="team">
+  {teamMembers.map((member) => <MemberCard {...member} />)}
+</div>
+
+<style>
+  .team {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+</style>
